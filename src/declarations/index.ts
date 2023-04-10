@@ -1,7 +1,5 @@
-import { UUID } from "crypto";
-
 export interface CriterionJudgment {
-	criterion_id: UUID  // criterion being judged by the DecisionMaker
+	criterion_id: string  // criterion being judged by the DecisionMaker
 	sp: Number  // "lower" value of the fuzzy judgement
 	sq: Number  // "higher" value of the fuzzy judgement
 	positive_distance?: Number
@@ -9,16 +7,16 @@ export interface CriterionJudgment {
 }
 
 export interface DecisionMaker {
-	id: UUID;
+	id: string;
 	criterion_judgments: CriterionJudgment[];
 	positive_ideal_solution: [Number, Number]; // the two values of the positive ideal solution
 	negative_ideal_solution: [Number, Number]; // the two values of the negative ideal solution
 	name: string;
-	weight: string;
+	weight: number;
 }
 
 export interface Alternative { 
-	id: UUID;
+	id: string;
 	name: string;
   total_distance_positive: Number;
   total_distance_negative: Number;
@@ -27,8 +25,8 @@ export interface Alternative {
 }
 
 export interface AggregatedJudgment {
-	id: UUID;
-	alternative_id: UUID;
+	id: string;
+	alternative_id: string;
 	sp: Number;
 	sq: Number;
 	positive_distance: Number;
@@ -36,8 +34,8 @@ export interface AggregatedJudgment {
 }
 
 export interface AlternativeJudgment {
-	id: UUID;
-	decision_maker_id: UUID;
+	id: string;
+	decision_maker_id: string;
 	max_value: Number;
 	min_value: Number;
 }
@@ -45,7 +43,7 @@ export interface AlternativeJudgment {
 export type CriterionType = "benefit" | "cost";
 
 export interface Criterion {
-  id: UUID;
+  id: string;
 	description: string;
 	criterion_type: CriterionType;
 	total_positive_distance: 0  // distance of this criterion to the positive ideal
