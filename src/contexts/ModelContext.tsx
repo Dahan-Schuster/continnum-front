@@ -13,6 +13,7 @@ interface ModelContextValue {
   setCriteria: (x: Criterion[]) => void;
   decisionMakers: DecisionMaker[];
   setDecisionMakers: (dms: DecisionMaker[]) => void;
+	deleteDecisionMaker: (decisionMakerId: string) => void;
   alternatives: Alternative[];
   setAlternatives: (alts: Alternative[]) => void;
 	addCriterionJudgmentFromDecisionMaker: (decisionMakerId: UUID, criterionJudgment: CriterionJudgment) => void;
@@ -31,6 +32,17 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   const [criteria, setCriteria] = React.useState<Criterion[]>([]);
   const [decisionMakers, setDecisionMakers] = React.useState<DecisionMaker[]>([]);
   const [alternatives, setAlternatives] = React.useState<Alternative[]>([]);
+
+	/**
+	 * Deleta um DecisionMaker da lista a partir de seu ID
+	 */
+  const deleteDecisionMaker = React.useCallback((decisionMakerId: string) => {
+    setDecisionMakers(
+			produce(draft => {
+				return draft.filter((dm) => dm.id !== decisionMakerId)
+			})
+		);
+  }, []);
 
   const addCriterionJudgmentFromDecisionMaker = React.useCallback(
     (decisionMakerId: UUID, { criterion_id, sp, sq }: CriterionJudgment) => {
@@ -57,6 +69,7 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
         setCriteria,
         decisionMakers,
         setDecisionMakers,
+				deleteDecisionMaker,
         alternatives,
         setAlternatives,
 				addCriterionJudgmentFromDecisionMaker,
