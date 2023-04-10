@@ -1,4 +1,5 @@
 {
 	"appName": "Continnum",
-	"description": "Decision Making Tool"
+	"description": "Decision Making Tool",
+	"requiredDecisionMakersWeight": 1
 }
