@@ -2,10 +2,10 @@ import { UUID } from "crypto";
 
 export interface CriterionJudgment {
 	criterion_id: UUID  // criterion being judged by the DecisionMaker
-	positive_distance: Number
-	negative_distance: Number
 	sp: Number  // "lower" value of the fuzzy judgement
 	sq: Number  // "higher" value of the fuzzy judgement
+	positive_distance?: Number
+	negative_distance?: Number
 }
 
 export interface DecisionMaker {
