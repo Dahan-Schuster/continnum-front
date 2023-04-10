@@ -14,6 +14,7 @@ interface ModelContextValue {
   decisionMakers: DecisionMaker[];
   setDecisionMakers: (dms: DecisionMaker[]) => void;
 	deleteDecisionMaker: (decisionMakerId: string) => void;
+	getTotalDecisionMakersWeight: () => number;
   alternatives: Alternative[];
   setAlternatives: (alts: Alternative[]) => void;
 	addCriterionJudgmentFromDecisionMaker: (decisionMakerId: UUID, criterionJudgment: CriterionJudgment) => void;
@@ -44,6 +45,20 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
 		);
   }, []);
 
+	/**
+	 * Calcula de retorna o valor total dos pesos dos decisores, arredondado
+	 * para o decimal mais próximo
+	 */
+  const getTotalDecisionMakersWeight = React.useCallback(() => {
+    let totalWeight = decisionMakers.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.weight,
+      0
+    );
+
+		totalWeight = Math.ceil(totalWeight * 10) / 10;
+    return totalWeight;
+  }, [decisionMakers]);
+
   const addCriterionJudgmentFromDecisionMaker = React.useCallback(
     (decisionMakerId: UUID, { criterion_id, sp, sq }: CriterionJudgment) => {
       setDecisionMakers(
@@ -70,6 +85,7 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
         decisionMakers,
         setDecisionMakers,
 				deleteDecisionMaker,
+				getTotalDecisionMakersWeight,
         alternatives,
         setAlternatives,
 				addCriterionJudgmentFromDecisionMaker,
