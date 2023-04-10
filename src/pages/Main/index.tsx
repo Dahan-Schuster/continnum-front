@@ -1,20 +1,19 @@
 import React from "react";
+import { Route } from "react-router-dom";
+import ReactSlideRoutes from "react-slide-routes";
+import EntryPage from "./EntryPage";
 
-import './styles.css';
-
-interface MainPageProps {
-
-}
+interface MainPageProps {}
 
 /**
-* Página inicial do sistema
-*/
+ * Página inicial do sistema
+ */
 const MainPage: React.FunctionComponent<MainPageProps> = () => {
-	return (
-		<div >
-			yo!
-		</div>
-	);
+  return (
+    <ReactSlideRoutes duration={1000}>
+      <Route index element={<EntryPage />} />
+    </ReactSlideRoutes>
+  );
 };
 
 export default MainPage;
