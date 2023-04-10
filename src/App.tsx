@@ -29,7 +29,7 @@ function App() {
         <div className={classes.mainContainer}>
           <BrowserRouter>
             <Routes>
-              <Route index element={<MainPage />} />
+              <Route path="/*" element={<MainPage />} />
             </Routes>
           </BrowserRouter>
         </div>
