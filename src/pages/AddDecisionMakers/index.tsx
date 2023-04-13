@@ -117,12 +117,13 @@ const AddDecisionMakers = () => {
         The sum of all weights must be equal to {config.requiredDecisionMakersWeight}. Current total weight:{" "}
         {getTotalDecisionMakersWeight().toFixed(2)}
       </p>
+
+			{/* Mapeia os decisores cadastrados renderizando inputs de edição do nome e do peso  */}
       {decisionMakers.map((dm) => (
         <div key={dm.id}>
           <TextField
             label="Name"
             value={dm.name}
-            onBlur={(e) => handleDecisionMakerNameChange(dm.id, e.target.value)}
           />
           <TextField label="Weight" value={dm.weight} disabled />
           <IconButton
@@ -133,6 +134,8 @@ const AddDecisionMakers = () => {
           </IconButton>
         </div>
       ))}
+
+			{/* Inputs for new decision maker */}
       <div>
         <TextField label="Name" value={name} onChange={handleNameChange} />
         <TextField
@@ -140,7 +143,7 @@ const AddDecisionMakers = () => {
           value={weight}
           onChange={handleWeightChange}
         />
-        <IconButton aria-label="add" onClick={handleAddDecisionMaker}>
+        <IconButton aria-label="Add Decision Maker" onClick={handleAddDecisionMaker}>
           <AddIcon />
         </IconButton>
       </div>
