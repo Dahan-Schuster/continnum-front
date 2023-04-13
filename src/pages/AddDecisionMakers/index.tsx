@@ -124,6 +124,7 @@ const AddDecisionMakers = () => {
           <TextField
             label="Name"
             value={dm.name}
+            onChange={(e) => handleDecisionMakerNameChange(dm.id, e.target.value)}
           />
           <TextField label="Weight" value={dm.weight} disabled />
           <IconButton
