@@ -15,15 +15,14 @@ interface MainPageProps {}
 const MainPage: React.FunctionComponent<MainPageProps> = () => {
   return (
     <Grid container height="100vh">
-      <Grid item xs={12}>
+      <Grid item xs={12} height="fit-content">
         <Header />
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} height="100%">
         <Box
           display={"flex"}
           justifyContent="center"
           alignItems={"center"}
-          height={"100%"}
         >
           <ReactSlideRoutes duration={500}>
             <Route index element={<EntryPage />} />
@@ -35,7 +34,7 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
           </ReactSlideRoutes>
         </Box>
       </Grid>
-      <Grid item xs={12}>
+      <Grid item xs={12} height="fit-content">
         <div>rodapé</div>
       </Grid>
     </Grid>
