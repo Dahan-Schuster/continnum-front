@@ -6,9 +6,12 @@ import {
   Criterion,
   CriterionJudgment,
   DecisionMaker,
+  ModelProgressStep,
+  ModelSteps,
 } from "../declarations";
 
 interface ModelContextValue {
+  currentStep: ModelProgressStep;
   criteria: Criterion[];
   setCriteria: (x: Criterion[]) => void;
   decisionMakers: DecisionMaker[];
@@ -34,6 +37,10 @@ export default ModelContext;
 export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [currentStep, setCurrentStep] = React.useState<ModelProgressStep>(
+    ModelSteps[0]
+  );
+
   const [criteria, setCriteria] = React.useState<Criterion[]>([]);
   const [decisionMakers, setDecisionMakers] = React.useState<DecisionMaker[]>(
     []
@@ -101,6 +108,7 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <ModelContext.Provider
       value={{
+        currentStep,
         criteria,
         setCriteria,
         decisionMakers,
