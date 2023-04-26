@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, IconButton, TextField } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useModel } from "../../contexts/ModelContext";
@@ -21,7 +28,7 @@ const AddDecisionMakers = () => {
   // bsuca os dados do contexto
   const {
     decisionMakers,
-		addDecisionMaker,
+    addDecisionMaker,
     setDecisionMakers,
     deleteDecisionMaker,
     getTotalDecisionMakersWeight,
@@ -31,11 +38,11 @@ const AddDecisionMakers = () => {
   const [name, setName] = useState("");
   const [weight, setWeight] = useState("");
 
-	/**
-	 * Valida se o peso total dos decisores mais o peso do novo
-	 * decisor ulttrapassam o valor para peso definido no JSON
-	 * de configurações
-	 */
+  /**
+   * Valida se o peso total dos decisores mais o peso do novo
+   * decisor ulttrapassam o valor para peso definido no JSON
+   * de configurações
+   */
   const validateNewTotalWeight = React.useCallback(
     (newWeight: number): boolean => {
       if (isNaN(newWeight)) {
@@ -45,7 +52,9 @@ const AddDecisionMakers = () => {
       const totalWeight = getTotalDecisionMakersWeight();
 
       if (totalWeight + newWeight > config.requiredDecisionMakersWeight) {
-        alert(`The sum of all weights must be equal to ${config.requiredDecisionMakersWeight}.`);
+        alert(
+          `A soma de todos os pesos deve ser igual a ${config.requiredDecisionMakersWeight}.`
+        );
         return false;
       }
 
@@ -54,22 +63,22 @@ const AddDecisionMakers = () => {
     [getTotalDecisionMakersWeight]
   );
 
-	/**
-	 * Callback chamado ao adicionar um DecisionMaker clicando no ícone AddIcon
-	 */
+  /**
+   * Callback chamado ao adicionar um DecisionMaker clicando no ícone AddIcon
+   */
   const handleAddDecisionMaker = React.useCallback(() => {
     const newWeight = parseFloat(weight);
     if (!validateNewTotalWeight(newWeight)) return;
 
-		addDecisionMaker(name, newWeight);
+    addDecisionMaker(name, newWeight);
     setName("");
     setWeight("");
   }, [addDecisionMaker, name, validateNewTotalWeight, weight]);
 
-	/**
-	 * Callback de mudança do input de nome do novo DecisionMaker
-	 * Altera o valor do estado do nome
-	 */
+  /**
+   * Callback de mudança do input de nome do novo DecisionMaker
+   * Altera o valor do estado do nome
+   */
   const handleNameChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       setName(event.target.value);
@@ -77,18 +86,18 @@ const AddDecisionMakers = () => {
     []
   );
 
-	/**
-	 * Callback de mudança do input de peso do novo DecisionMaker
-	 * Altera o valor do estado do peso
-	 */
+  /**
+   * Callback de mudança do input de peso do novo DecisionMaker
+   * Altera o valor do estado do peso
+   */
   const handleWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setWeight(event.target.value);
   };
 
-	/**
-	 * Callback de mudança do nome do DecisionMaker já cadastrado
-	 * Altera o valor do objeto no estado, salvando o novo nome
-	 */
+  /**
+   * Callback de mudança do nome do DecisionMaker já cadastrado
+   * Altera o valor do objeto no estado, salvando o novo nome
+   */
   const handleDecisionMakerNameChange = (
     decisionMakerId: string,
     newName: string
@@ -100,65 +109,112 @@ const AddDecisionMakers = () => {
     );
   };
 
-	// Método para navegar pra a próxima tela
+  // Método para navegar pra a próxima tela
   const navigate = useNavigate();
   const handleGoFoward = () => {
     navigate("/alternatives");
   };
 
   return (
-    <div>
-      <h1>Add Decision Makers</h1>
-      <p>
-        Fill in the name and weight of the new decision maker below, then click
-        "Add Decision Maker" to add it to the list.
-      </p>
-      <p>
-        The sum of all weights must be equal to {config.requiredDecisionMakersWeight}. Current total weight:{" "}
-        {getTotalDecisionMakersWeight().toFixed(2)}
-      </p>
-
-			{/* Mapeia os decisores cadastrados renderizando inputs de edição do nome e do peso  */}
-      {decisionMakers.map((dm) => (
-        <div key={dm.id}>
-          <TextField
-            label="Name"
-            value={dm.name}
-            onChange={(e) => handleDecisionMakerNameChange(dm.id, e.target.value)}
-          />
-          <TextField label="Weight" value={dm.weight} disabled />
-          <IconButton
-            aria-label="delete"
-            onClick={() => deleteDecisionMaker(dm.id)}
-          >
-            <DeleteIcon />
-          </IconButton>
-        </div>
-      ))}
-
-			{/* Inputs for new decision maker */}
-      <div>
-        <TextField label="Name" value={name} onChange={handleNameChange} />
-        <TextField
-          label="Weight"
-          value={weight}
-          onChange={handleWeightChange}
-        />
-        <IconButton aria-label="Add Decision Maker" onClick={handleAddDecisionMaker}>
-          <AddIcon />
-        </IconButton>
-      </div>
-
-      <div>
-        <Button
-          variant="contained"
-          onClick={handleGoFoward}
-          disabled={getTotalDecisionMakersWeight() !== config.requiredDecisionMakersWeight}
+    <Grid container>
+      <Grid item xs={12} mb={2}>
+        <Typography
+          variant="h2"
+          textAlign={"center"}
+          fontSize={"1.5rem"}
+          fontWeight="bold"
         >
-          Next
-        </Button>
-      </div>
-    </div>
+          Passo 1
+        </Typography>
+      </Grid>
+      <Grid item xs={12}>
+        <Typography component="p" textAlign={"center"} fontSize={"1rem"}>
+          Informe o nome e o peso de cada um dos decisores.
+        </Typography>
+        <Typography component="p" textAlign={"center"} fontSize={"1rem"}>
+          A soma dos pesos deve ser igual a{" "}
+          {config.requiredDecisionMakersWeight}. Peso total atual:{" "}
+          {getTotalDecisionMakersWeight().toFixed(2)}
+        </Typography>
+      </Grid>
+
+      <Grid item xs={8} mx="auto" my={3}>
+        <Grid container>
+          {/* Mapeia os decisores cadastrados renderizando inputs de edição do nome e do peso  */}
+          {decisionMakers.map((dm) => (
+            <Grid container mt={1}>
+              <Grid item xs={12} sm={6} pr={5}>
+                <TextField
+                  fullWidth
+                  label="Name"
+                  value={dm.name}
+                  onChange={(e) =>
+                    handleDecisionMakerNameChange(dm.id, e.target.value)
+                  }
+                />
+              </Grid>
+              <Grid item xs={12} sm={5}>
+                <TextField
+                  label="Weight"
+                  value={dm.weight}
+                  fullWidth
+                  disabled
+                />
+              </Grid>
+              <IconButton
+                aria-label="delete"
+                onClick={() => deleteDecisionMaker(dm.id)}
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Grid>
+          ))}
+        </Grid>
+
+        <Grid item xs={12} mt={1}>
+          <Grid container>
+            <Grid item xs={12} sm={6} pr={5}>
+              {/* Inputs for new decision maker */}
+              <TextField
+                label="Name"
+                value={name}
+                onChange={handleNameChange}
+                fullWidth
+              />
+            </Grid>
+            <Grid item xs={12} sm={5}>
+              <TextField
+                label="Weight"
+                value={weight}
+                onChange={handleWeightChange}
+                fullWidth
+              />
+            </Grid>
+            <IconButton
+              aria-label="Add Decision Maker"
+              onClick={handleAddDecisionMaker}
+            >
+              <AddIcon />
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Grid>
+
+      <Grid item xs={12} mt={3}>
+        <div>
+          <Button
+            variant="contained"
+            onClick={handleGoFoward}
+            disabled={
+              getTotalDecisionMakersWeight() !==
+              config.requiredDecisionMakersWeight
+            }
+          >
+            Next
+          </Button>
+        </div>
+      </Grid>
+    </Grid>
   );
 };
 
