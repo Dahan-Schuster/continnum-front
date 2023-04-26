@@ -3,6 +3,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { Route } from "react-router-dom";
 import ReactSlideRoutes from "react-slide-routes";
+import Header from "../../components/Header";
 import AddDecisionMakers from "../AddDecisionMakers";
 import EntryPage from "./EntryPage";
 
@@ -15,9 +16,7 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
   return (
     <Grid container height="100vh">
       <Grid item xs={12}>
-				<Grid item xs={12}>
-					<div>cabeçalho</div>
-				</Grid>
+        <Header />
       </Grid>
       <Grid item xs={12}>
         <Box
