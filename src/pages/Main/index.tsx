@@ -23,14 +23,15 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
           display={"flex"}
           justifyContent="center"
           alignItems={"center"}
+          px={1}
         >
           <ReactSlideRoutes duration={500}>
             <Route index element={<EntryPage />} />
             <Route path="/dms" element={<AddDecisionMakers />} />
             {/*
-					<Route path="/criteria" element={<AddCriteria />} />
-					<Route path="/alternatives" element={<AddAlternatives />} />
-					*/}
+						<Route path="/criteria" element={<AddCriteria />} />
+						<Route path="/alternatives" element={<AddAlternatives />} />
+						*/}
           </ReactSlideRoutes>
         </Box>
       </Grid>
