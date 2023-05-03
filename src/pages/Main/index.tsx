@@ -18,7 +18,7 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
       <Grid item xs={12} height="fit-content">
         <Header />
       </Grid>
-      <Grid item xs={12} height="100%">
+      <Grid item xs={12} mt={5} height="100%">
         <Box
           display={"flex"}
           justifyContent="center"
