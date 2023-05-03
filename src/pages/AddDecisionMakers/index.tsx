@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import {
-  Box,
-  Button,
   Grid,
   IconButton,
   TextField,
@@ -10,7 +8,6 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useModel } from "../../contexts/ModelContext";
-import { useNavigate } from "react-router-dom";
 
 import config from "../../config.json";
 
@@ -27,6 +24,7 @@ import config from "../../config.json";
 const AddDecisionMakers = () => {
   // bsuca os dados do contexto
   const {
+		setCanGoForward,
     decisionMakers,
     addDecisionMaker,
     setDecisionMakers,
@@ -107,11 +105,13 @@ const AddDecisionMakers = () => {
     );
   };
 
-  // Método para navegar pra a próxima tela
-  const navigate = useNavigate();
-  const handleGoFoward = () => {
-    navigate("/alternatives");
-  };
+	/**
+	 * Efeito chamado sempre que o array de tomadores de decisão mudar
+	 * Define se u usuárie pode avançar baseado no peso total dos decisores
+	 */
+  React.useEffect(() => {
+		setCanGoForward(totalDecisionMakersWeight === config.requiredDecisionMakersWeight);
+  }, [setCanGoForward, totalDecisionMakersWeight]);
 
   return (
     <Grid container>
@@ -152,12 +152,7 @@ const AddDecisionMakers = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={5}>
-                <TextField
-                  label="Peso"
-                  value={dm.weight}
-                  fullWidth
-                  disabled
-                />
+                <TextField label="Peso" value={dm.weight} fullWidth disabled />
               </Grid>
               <IconButton
                 aria-label="delete"
@@ -196,21 +191,6 @@ const AddDecisionMakers = () => {
             </IconButton>
           </Grid>
         </Grid>
-      </Grid>
-
-      <Grid item xs={12} mt={3}>
-        <div>
-          <Button
-            variant="contained"
-            onClick={handleGoFoward}
-            disabled={
-              getTotalDecisionMakersWeight() !==
-              config.requiredDecisionMakersWeight
-            }
-          >
-            Next
-          </Button>
-        </div>
       </Grid>
     </Grid>
   );
