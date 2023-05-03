@@ -15,6 +15,8 @@ interface ModelContextValue {
   setCriteria: (x: Criterion[]) => void;
   alternatives: Alternative[];
   setAlternatives: (alts: Alternative[]) => void;
+  canGoForward: boolean;
+  setCanGoForward: (doesIt: boolean) => void;
 }
 
 const ModelContext = React.createContext<
@@ -29,6 +31,7 @@ export default ModelContext;
 export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [canGoForward, setCanGoForward] = React.useState<boolean>(false);
   const [currentStep, setCurrentStep] = React.useState<ModelProgressStep>(
     ModelSteps[0]
   );
@@ -48,6 +51,8 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <ModelContext.Provider
       value={{
+        canGoForward,
+        setCanGoForward,
         currentStep,
         criteria,
         setCriteria,
