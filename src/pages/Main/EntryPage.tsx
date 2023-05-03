@@ -17,7 +17,7 @@ const EntryPage = () => {
   const classes = useStyles();
 
   const handleClick = () => {
-    navigate("/dms");
+    navigate("/model/dms");
   };
 
   return (
@@ -29,7 +29,7 @@ const EntryPage = () => {
         {config.description}
       </Typography>
       <Button color="primary" variant="contained" onClick={handleClick}>
-        Start model
+        Começar
       </Button>
     </div>
   );

@@ -8,7 +8,7 @@ function App() {
     <ModelProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/*" element={<MainPage />} />
+          <Route path="/model/*" element={<MainPage />} />
         </Routes>
       </BrowserRouter>
     </ModelProvider>
