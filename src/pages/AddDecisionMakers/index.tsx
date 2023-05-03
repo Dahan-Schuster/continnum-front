@@ -146,7 +146,7 @@ const AddDecisionMakers = () => {
               <Grid item xs={12} sm={6} pr={5}>
                 <TextField
                   fullWidth
-                  label="Name"
+                  label="Nome"
                   value={dm.name}
                   onChange={(e) =>
                     handleDecisionMakerNameChange(dm.id, e.target.value)
@@ -155,7 +155,7 @@ const AddDecisionMakers = () => {
               </Grid>
               <Grid item xs={12} sm={5}>
                 <TextField
-                  label="Weight"
+                  label="Peso"
                   value={dm.weight}
                   fullWidth
                   disabled
@@ -176,7 +176,7 @@ const AddDecisionMakers = () => {
             <Grid item xs={12} sm={6} pr={5}>
               {/* Inputs for new decision maker */}
               <TextField
-                label="Name"
+                label="Nome"
                 value={name}
                 onChange={handleNameChange}
                 fullWidth
@@ -184,7 +184,7 @@ const AddDecisionMakers = () => {
             </Grid>
             <Grid item xs={12} sm={5}>
               <TextField
-                label="Weight"
+                label="Peso"
                 value={weight}
                 onChange={handleWeightChange}
                 fullWidth
