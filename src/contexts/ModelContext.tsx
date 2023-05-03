@@ -41,7 +41,7 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
     addDecisionMaker,
     setDecisionMakers,
     deleteDecisionMaker,
-    getTotalDecisionMakersWeight,
+    totalDecisionMakersWeight,
     addCriterionJudgmentFromDecisionMaker,
   } = useDecisionMakers();
 
@@ -57,7 +57,7 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
         addDecisionMaker,
         setDecisionMakers,
         deleteDecisionMaker,
-        getTotalDecisionMakersWeight,
+        totalDecisionMakersWeight,
         addCriterionJudgmentFromDecisionMaker,
       }}
     >

@@ -8,7 +8,7 @@ export interface DecisionMakersHookValues {
   addDecisionMaker: (name: string, weight: number) => void;
   setDecisionMakers: (dms: DecisionMaker[]) => void;
   deleteDecisionMaker: (decisionMakerId: string) => void;
-  getTotalDecisionMakersWeight: () => number;
+  totalDecisionMakersWeight: number;
   addCriterionJudgmentFromDecisionMaker: (
     decisionMakerId: string,
     criterionJudgment: CriterionJudgment
@@ -56,7 +56,7 @@ const useDecisionMakers = (): DecisionMakersHookValues => {
    * Calcula de retorna o valor total dos pesos dos decisores, arredondado
    * para o decimal mais próximo
    */
-  const getTotalDecisionMakersWeight = React.useCallback(() => {
+  const totalDecisionMakersWeight = React.useMemo(() => {
     let totalWeight = decisionMakers.reduce(
       (accumulator, currentValue) => accumulator + currentValue.weight,
       0
@@ -89,7 +89,7 @@ const useDecisionMakers = (): DecisionMakersHookValues => {
 		addDecisionMaker,
 		deleteDecisionMaker,
 		setDecisionMakers,
-		getTotalDecisionMakersWeight,
+		totalDecisionMakersWeight,
 		addCriterionJudgmentFromDecisionMaker,
 	};
 };

@@ -31,7 +31,7 @@ const AddDecisionMakers = () => {
     addDecisionMaker,
     setDecisionMakers,
     deleteDecisionMaker,
-    getTotalDecisionMakersWeight,
+    totalDecisionMakersWeight,
   } = useModel();
 
   // valores dos inputs de nome e peso do novo tomador de decisão
@@ -49,9 +49,7 @@ const AddDecisionMakers = () => {
         return false;
       }
 
-      const totalWeight = getTotalDecisionMakersWeight();
-
-      if (totalWeight + newWeight > config.requiredDecisionMakersWeight) {
+      if (totalDecisionMakersWeight + newWeight > config.requiredDecisionMakersWeight) {
         alert(
           `A soma de todos os pesos deve ser igual a ${config.requiredDecisionMakersWeight}.`
         );
@@ -60,7 +58,7 @@ const AddDecisionMakers = () => {
 
       return true;
     },
-    [getTotalDecisionMakersWeight]
+    [totalDecisionMakersWeight]
   );
 
   /**
@@ -134,7 +132,7 @@ const AddDecisionMakers = () => {
         <Typography component="p" textAlign={"center"} fontSize={"1rem"}>
           A soma dos pesos deve ser igual a{" "}
           {config.requiredDecisionMakersWeight}. Peso total atual:{" "}
-          {getTotalDecisionMakersWeight().toFixed(2)}
+          {totalDecisionMakersWeight.toFixed(2)}
         </Typography>
       </Grid>
 
