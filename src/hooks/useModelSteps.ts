@@ -137,7 +137,7 @@ const useModelSteps = (): ModelStepsHookValues => {
    * Altera o estado da rota atual para a próxima rota, se houver
    */
   const goForward = React.useCallback(() => {
-    if (!canGoForward) return;
+    if (!canGoForward || !currentRoute.nextRoute) return;
     setCurrentRoute((current) => {
       const nextRoute = AvailableRoutes.find(
         (r) => r.name === current.nextRoute
@@ -150,7 +150,7 @@ const useModelSteps = (): ModelStepsHookValues => {
 
       return nextRoute;
     });
-  }, [canGoForward]);
+  }, [canGoForward, currentRoute.nextRoute]);
 
   /**
    * Altera o estado da rota atual para a rota anterior, se houver
