@@ -21,6 +21,7 @@ const ModelProgress: React.FunctionComponent<ModelProgressProps> = () => {
 
         return (
           <Grid
+						key={step.order}
             item
             xs={4}
             display={"flex"}
