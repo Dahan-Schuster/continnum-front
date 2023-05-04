@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  Grid,
-  IconButton,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Grid, IconButton, TextField, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useModel } from "../../contexts/ModelContext";
@@ -24,7 +19,8 @@ import config from "../../config.json";
 const AddDecisionMakers = () => {
   // bsuca os dados do contexto
   const {
-		setCanGoForward,
+    setCanGoBack,
+    setCanGoForward,
     decisionMakers,
     addDecisionMaker,
     setDecisionMakers,
@@ -47,7 +43,10 @@ const AddDecisionMakers = () => {
         return false;
       }
 
-      if (totalDecisionMakersWeight + newWeight > config.requiredDecisionMakersWeight) {
+      if (
+        totalDecisionMakersWeight + newWeight >
+        config.requiredDecisionMakersWeight
+      ) {
         alert(
           `A soma de todos os pesos deve ser igual a ${config.requiredDecisionMakersWeight}.`
         );
@@ -105,13 +104,23 @@ const AddDecisionMakers = () => {
     );
   };
 
+  /**
+   * Efeito chamado sempre que o array de tomadores de decisão mudar
+   * Define se u usuárie pode avançar baseado no peso total dos decisores
+   */
+  React.useEffect(() => {
+    setCanGoForward(
+      totalDecisionMakersWeight === config.requiredDecisionMakersWeight
+    );
+  }, [setCanGoForward, totalDecisionMakersWeight]);
+
 	/**
-	 * Efeito chamado sempre que o array de tomadores de decisão mudar
-	 * Define se u usuárie pode avançar baseado no peso total dos decisores
+	 * Libera o botão de voltar ao entrar na página
 	 */
   React.useEffect(() => {
-		setCanGoForward(totalDecisionMakersWeight === config.requiredDecisionMakersWeight);
-  }, [setCanGoForward, totalDecisionMakersWeight]);
+    setCanGoBack(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Grid container>
