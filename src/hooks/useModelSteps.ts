@@ -55,6 +55,22 @@ export const ModelSteps: ModelProgressStep[] = [
         name: RouteNames.criteria,
         nextRoute: RouteNames.alternatives,
       },
+      {
+        step: 1,
+        label: "passo 3",
+        description: "Insira as alternativas",
+        prevRoute: RouteNames.criteria,
+        name: RouteNames.alternatives,
+        nextRoute: RouteNames.scale,
+      },
+      {
+        step: 1,
+        label: "passo 4",
+        description: "Escolha a escala de termos linguísticos a serem utilizados nos julgamentos",
+        prevRoute: RouteNames.alternatives,
+        name: RouteNames.scale,
+        nextRoute: RouteNames.void, // FIXME: rota para o próximo passo
+      },
     ],
   },
   { order: 2, label: "B", description: "Inserir Julgamentos", routes: [] },

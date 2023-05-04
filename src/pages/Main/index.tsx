@@ -8,6 +8,9 @@ import AddDecisionMakers from "../AddDecisionMakers";
 
 import { useModel } from "../../contexts/ModelContext";
 import EntryPage from "./EntryPage";
+import AddCriteria from "../AddCriteria";
+import AddAlternatives from "../AddAlternatives";
+import SelectLinguisticScale from "../SelectLinguisticScale";
 
 interface MainPageProps {}
 
@@ -46,10 +49,9 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
           <ReactSlideRoutes duration={500}>
             <Route index element={<EntryPage />} />
             <Route path="/dms" element={<AddDecisionMakers />} />
-            {/*
 						<Route path="/criteria" element={<AddCriteria />} />
 						<Route path="/alternatives" element={<AddAlternatives />} />
-						*/}
+						<Route path="/linguistic-scale" element={<SelectLinguisticScale />} />
           </ReactSlideRoutes>
         </Box>
       </Grid>
