@@ -4,8 +4,8 @@ export interface ModelPorgressSubstep {
   label: string;
   description: string;
   route: string;
-  nextRoute?: string;
-  prevRoute?: string;
+  nextRoute: string;
+  prevRoute: string;
 }
 
 export interface ModelProgressStep {
