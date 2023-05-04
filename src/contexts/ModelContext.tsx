@@ -1,13 +1,10 @@
 import React from "react";
-import {
-  Alternative,
-  Criterion,
-  ModelProgressStep,
-  ModelSteps,
-} from "../declarations";
+import { Alternative, Criterion } from "../declarations";
 import useDecisionMakers, {
   DecisionMakersHookValues,
 } from "../hooks/useDecisionMakers";
+
+import useModelSteps, { ModelStepsHookValues } from "../hooks/useModelSteps";
 
 interface ModelContextValue {
   currentStep: ModelProgressStep;

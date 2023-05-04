@@ -1,7 +1,7 @@
 import { Grid, Box, Typography } from "@mui/material";
 import React from "react";
 import { useModel } from "../contexts/ModelContext";
-import { ModelSteps } from "../declarations";
+import { ModelSteps } from "../hooks/useModelSteps";
 import colors from "../utils/colors";
 
 interface ModelProgressProps {}

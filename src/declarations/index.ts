@@ -58,14 +58,3 @@ export interface Criterion {
   negative_ideal_solution: Number[]; // the two values of the negative ideal solution
 }
 
-export interface ModelProgressStep {
-  order: number;
-  label: string;
-  description: string;
-}
-
-export const ModelSteps: ModelProgressStep[] = [
-  { order: 1, label: "A", description: "Definir Problema" },
-  { order: 2, label: "B", description: "Inserir Julgamentos" },
-  { order: 3, label: "C", description: "Resultados" },
-];
