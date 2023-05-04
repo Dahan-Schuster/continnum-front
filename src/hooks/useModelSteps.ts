@@ -22,11 +22,18 @@ export const ModelSteps: ModelProgressStep[] = [
     description: "Definir Problema",
     substeps: [
       {
+        label: "",
+        description: "",
+        route: "/model/",
+        nextRoute: "/model/dms",
+        prevRoute: "",
+      },
+      {
         label: "passo 1",
         description: "informe o nome e o peso de cada um dos decisores",
         route: "/model/dms",
         nextRoute: "/model/criteria",
-        prevRoute: undefined,
+        prevRoute: "",
       },
       {
         label: "passo 2",
