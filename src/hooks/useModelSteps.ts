@@ -42,7 +42,7 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 1",
-        description: "informe o nome e o peso de cada um dos decisores",
+        description: "Informe o nome e o peso de cada um dos Decisores",
         prevRoute: RouteNames.model,
         name: RouteNames.dms,
         nextRoute: RouteNames.criteria,
@@ -50,7 +50,7 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 2",
-        description: "Informe e classifique os critérios",
+        description: "Informe e classifique os Critérios",
         prevRoute: RouteNames.dms,
         name: RouteNames.criteria,
         nextRoute: RouteNames.alternatives,
@@ -58,7 +58,7 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 3",
-        description: "Insira as alternativas",
+        description: "Insira as Alternativas",
         prevRoute: RouteNames.criteria,
         name: RouteNames.alternatives,
         nextRoute: RouteNames.scale,
@@ -66,7 +66,7 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 4",
-        description: "Escolha a escala de termos linguísticos a serem utilizados nos julgamentos",
+        description: "Escolha a Escala de Rermos Linguísticos a serem utilizados nos Julgamentos",
         prevRoute: RouteNames.alternatives,
         name: RouteNames.scale,
         nextRoute: RouteNames.void, // FIXME: rota para o próximo passo

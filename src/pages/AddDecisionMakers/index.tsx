@@ -124,28 +124,7 @@ const AddDecisionMakers = () => {
 
   return (
     <Grid container>
-      <Grid item xs={12} mb={2}>
-        <Typography
-          variant="h2"
-          textAlign={"center"}
-          fontSize={"1.5rem"}
-          fontWeight="bold"
-        >
-          Passo 1
-        </Typography>
-      </Grid>
-      <Grid item xs={12}>
-        <Typography component="p" textAlign={"center"} fontSize={"1rem"}>
-          Informe o nome e o peso de cada um dos decisores.
-        </Typography>
-        <Typography component="p" textAlign={"center"} fontSize={"1rem"}>
-          A soma dos pesos deve ser igual a{" "}
-          {config.requiredDecisionMakersWeight}. Peso total atual:{" "}
-          {totalDecisionMakersWeight.toFixed(2)}
-        </Typography>
-      </Grid>
-
-      <Grid item xs={8} mx="auto" my={3}>
+      <Grid item xs={12} mx="auto">
         <Grid container>
           {/* Mapeia os decisores cadastrados renderizando inputs de edição do nome e do peso  */}
           {decisionMakers.map((dm) => (

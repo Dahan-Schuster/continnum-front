@@ -1,4 +1,4 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React from "react";
 import { Route, useNavigate } from "react-router-dom";
@@ -39,6 +39,24 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
       <Grid item xs={12} height="fit-content">
         <Header />
       </Grid>
+      <Grid item xs={12} mb={2}>
+        <Typography
+          variant="h2"
+          textAlign={"center"}
+          fontSize={"1.5rem"}
+          fontWeight="bold"
+          textTransform={"capitalize"}
+        >
+          {currentRoute.label}
+        </Typography>
+        <Typography
+          component="p"
+          textAlign={"center"}
+          fontSize={"1rem"}
+        >
+          {currentRoute.description}
+        </Typography>
+      </Grid>
       <Grid item xs={12} mt={5} height="auto">
         <Box
           display={"flex"}
@@ -49,9 +67,12 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
           <ReactSlideRoutes duration={500}>
             <Route index element={<EntryPage />} />
             <Route path="/dms" element={<AddDecisionMakers />} />
-						<Route path="/criteria" element={<AddCriteria />} />
-						<Route path="/alternatives" element={<AddAlternatives />} />
-						<Route path="/linguistic-scale" element={<SelectLinguisticScale />} />
+            <Route path="/criteria" element={<AddCriteria />} />
+            <Route path="/alternatives" element={<AddAlternatives />} />
+            <Route
+              path="/linguistic-scale"
+              element={<SelectLinguisticScale />}
+            />
           </ReactSlideRoutes>
         </Box>
       </Grid>
