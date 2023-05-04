@@ -52,6 +52,10 @@ export interface ModelStepsHookValues {
   initialStep: ModelProgressStep;
   currentStep: ModelProgressStep;
   setCurrentStep: (step: ModelProgressStep) => void;
+
+  currentSubstep: ModelProgressSubstep;
+  setCurrentSubstep: (substep: ModelProgressSubstep) => void;
+
   canGoForward: boolean;
   setCanGoForward: (doesIt: boolean) => void;
   canGoBack: boolean;
@@ -63,10 +67,18 @@ export interface ModelStepsHookValues {
  * Define os passos existentes e expõe um estado com o passo atual
  */
 const useModelSteps = (): ModelStepsHookValues => {
+	// Passo inicial do modelo, configurado estaticamente
   const initialStep = React.useRef(ModelSteps[0]).current;
+	
+	// estado que guarda o passo atual
   const [currentStep, setCurrentStep] =
     React.useState<ModelProgressStep>(initialStep);
 
+	// estado que guarda o subpasso atual (rotas dentro do passo)
+  const [currentSubstep, setCurrentSubstep] =
+    React.useState<ModelProgressSubstep>(initialStep.substeps[0]);
+
+	// estados que informam se deve permitir avançar ou voltar no modelo
   const [canGoForward, setCanGoForward] = React.useState<boolean>(false);
   const [canGoBack, setCanGoBack] = React.useState<boolean>(false);
 
@@ -74,6 +86,8 @@ const useModelSteps = (): ModelStepsHookValues => {
     initialStep,
     currentStep,
     setCurrentStep,
+    currentSubstep,
+    setCurrentSubstep,
     canGoForward,
     setCanGoForward,
     canGoBack,
