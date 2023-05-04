@@ -46,15 +46,15 @@ export interface Criterion {
   id: string;
   description: string;
   criterion_type: CriterionType;
-  total_positive_distance: 0; // distance of this criterion to the positive ideal
-  total_negative_distance: 0; // distance of this criterion to the negative ideal
-  cci: 0; // unnormalized weight
-  normalized_cci: 0; // weight (level of importance) of the criterion
-  unnormalized_distance: 0;
-  normalized_distance: 0;
-  alternative_judgments: AlternativeJudgment[];
-  aggregated_judgments: AggregatedJudgment[];
-  positive_ideal_solution: Number[]; // the two values of the positive ideal solution
-  negative_ideal_solution: Number[]; // the two values of the negative ideal solution
+  total_positive_distance?: 0; // distance of this criterion to the positive ideal
+  total_negative_distance?: 0; // distance of this criterion to the negative ideal
+  cci?: 0; // unnormalized weight
+  normalized_cci?: 0; // weight (level of importance) of the criterion
+  unnormalized_distance?: 0;
+  normalized_distance?: 0;
+  alternative_judgments?: AlternativeJudgment[];
+  aggregated_judgments?: AggregatedJudgment[];
+  positive_ideal_solution?: Number[]; // the two values of the positive ideal solution
+  negative_ideal_solution?: Number[]; // the two values of the negative ideal solution
 }
 
