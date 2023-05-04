@@ -1,6 +1,6 @@
-import React, { useCallback } from "react";
+import React from "react";
 
-export interface ModelPorgressSubstep {
+export interface ModelProgressSubstep {
   label: string;
   description: string;
   route: string;
@@ -12,7 +12,7 @@ export interface ModelProgressStep {
   order: number;
   label: string;
   description: string;
-  substeps: ModelPorgressSubstep[];
+  substeps: ModelProgressSubstep[];
 }
 
 export const ModelSteps: ModelProgressStep[] = [
