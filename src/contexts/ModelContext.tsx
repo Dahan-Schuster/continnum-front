@@ -7,17 +7,14 @@ import useDecisionMakers, {
 import useModelSteps, { ModelStepsHookValues } from "../hooks/useModelSteps";
 
 interface ModelContextValue {
-  currentStep: ModelProgressStep;
   criteria: Criterion[];
   setCriteria: (x: Criterion[]) => void;
   alternatives: Alternative[];
   setAlternatives: (alts: Alternative[]) => void;
-  canGoForward: boolean;
-  setCanGoForward: (doesIt: boolean) => void;
 }
 
 const ModelContext = React.createContext<
-  (ModelContextValue & DecisionMakersHookValues) | null
+  (ModelContextValue & DecisionMakersHookValues & ModelStepsHookValues) | null
 >(null);
 export default ModelContext;
 
@@ -28,39 +25,21 @@ export default ModelContext;
 export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [canGoForward, setCanGoForward] = React.useState<boolean>(false);
-  const [currentStep, setCurrentStep] = React.useState<ModelProgressStep>(
-    ModelSteps[0]
-  );
-
   const [criteria, setCriteria] = React.useState<Criterion[]>([]);
   const [alternatives, setAlternatives] = React.useState<Alternative[]>([]);
 
-  const {
-    decisionMakers,
-    addDecisionMaker,
-    setDecisionMakers,
-    deleteDecisionMaker,
-    totalDecisionMakersWeight,
-    addCriterionJudgmentFromDecisionMaker,
-  } = useDecisionMakers();
+  const modelStepsUtils = useModelSteps();
+  const decisionMakersUtils = useDecisionMakers();
 
   return (
     <ModelContext.Provider
       value={{
-        canGoForward,
-        setCanGoForward,
-        currentStep,
         criteria,
         setCriteria,
         alternatives,
         setAlternatives,
-        decisionMakers,
-        addDecisionMaker,
-        setDecisionMakers,
-        deleteDecisionMaker,
-        totalDecisionMakersWeight,
-        addCriterionJudgmentFromDecisionMaker,
+        ...modelStepsUtils,
+        ...decisionMakersUtils,
       }}
     >
       {children}
