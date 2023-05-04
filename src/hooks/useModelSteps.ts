@@ -16,6 +16,15 @@ export interface ModelProgressStep {
   routes: ModelRoute[];
 }
 
+export const RouteNames = {
+	void: '',
+	model: '/model/',
+	dms: '/model/dms',
+	criteria: '/model/criteria',
+	alternatives: '/model/alternatives',
+	scale: '/model/linguistic-scale',
+}
+
 export const ModelSteps: ModelProgressStep[] = [
   {
     order: 1,
@@ -26,25 +35,25 @@ export const ModelSteps: ModelProgressStep[] = [
         step: 1,
         label: "",
         description: "",
-        name: "/model/",
-        nextRoute: "/model/dms",
-        prevRoute: "",
+        prevRoute: RouteNames.void,
+        name: RouteNames.model,
+        nextRoute: RouteNames.dms,
       },
       {
         step: 1,
         label: "passo 1",
         description: "informe o nome e o peso de cada um dos decisores",
-        name: "/model/dms",
-        nextRoute: "/model/criteria",
-        prevRoute: "/model/",
+        prevRoute: RouteNames.model,
+        name: RouteNames.dms,
+        nextRoute: RouteNames.criteria,
       },
       {
         step: 1,
         label: "passo 2",
         description: "Informe e classifique os critérios",
-        name: "/model/criteria",
-        nextRoute: "/model/alternatives",
-        prevRoute: "/model/dms",
+        prevRoute: RouteNames.dms,
+        name: RouteNames.criteria,
+        nextRoute: RouteNames.alternatives,
       },
     ],
   },
