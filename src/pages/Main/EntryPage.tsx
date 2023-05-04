@@ -1,8 +1,9 @@
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 
 import config from "../../config.json";
+import { useModel } from "../../contexts/ModelContext";
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -13,12 +14,13 @@ const useStyles = makeStyles(() => ({
 }));
 
 const EntryPage = () => {
-  const navigate = useNavigate();
   const classes = useStyles();
+  const { setCanGoForward, setCanGoBack } = useModel();
 
-  const handleClick = () => {
-    navigate("/model/dms");
-  };
+  React.useEffect(() => {
+    setCanGoForward(true);
+    setCanGoBack(false);
+  }, [setCanGoBack, setCanGoForward]);
 
   return (
     <div className={classes.content}>
@@ -28,9 +30,6 @@ const EntryPage = () => {
       <Typography variant="h4" mb={2} textAlign={"center"}>
         {config.description}
       </Typography>
-      <Button color="primary" variant="contained" onClick={handleClick}>
-        Começar
-      </Button>
     </div>
   );
 };
