@@ -1,5 +1,6 @@
 import React from "react";
-import { Alternative, Criterion } from "../declarations";
+import { Alternative } from "../declarations";
+import useCriteria, { CriteriaHookValues } from "../hooks/useCriteria";
 import useDecisionMakers, {
   DecisionMakersHookValues,
 } from "../hooks/useDecisionMakers";
@@ -7,14 +8,16 @@ import useDecisionMakers, {
 import useModelSteps, { ModelStepsHookValues } from "../hooks/useModelSteps";
 
 interface ModelContextValue {
-  criteria: Criterion[];
-  setCriteria: (x: Criterion[]) => void;
   alternatives: Alternative[];
   setAlternatives: (alts: Alternative[]) => void;
 }
 
 const ModelContext = React.createContext<
-  (ModelContextValue & DecisionMakersHookValues & ModelStepsHookValues) | null
+  | (ModelContextValue &
+      DecisionMakersHookValues &
+      CriteriaHookValues &
+      ModelStepsHookValues)
+  | null
 >(null);
 export default ModelContext;
 
@@ -25,21 +28,20 @@ export default ModelContext;
 export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [criteria, setCriteria] = React.useState<Criterion[]>([]);
   const [alternatives, setAlternatives] = React.useState<Alternative[]>([]);
 
   const modelStepsUtils = useModelSteps();
   const decisionMakersUtils = useDecisionMakers();
+  const criteriaUtils = useCriteria();
 
   return (
     <ModelContext.Provider
       value={{
-        criteria,
-        setCriteria,
         alternatives,
         setAlternatives,
         ...modelStepsUtils,
         ...decisionMakersUtils,
+        ...criteriaUtils,
       }}
     >
       {children}
