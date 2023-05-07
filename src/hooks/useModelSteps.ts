@@ -28,7 +28,7 @@ export const RouteNames = {
 export const ModelSteps: ModelProgressStep[] = [
   {
     order: 1,
-    label: "A",
+    label: "1",
     description: "Problema",
     routes: [
       {
@@ -42,7 +42,7 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 1",
-        description: "Informe o nome e o peso de cada um dos Decisores",
+        description: "Informe o nome e o peso de cada Decisor",
         prevRoute: RouteNames.model,
         name: RouteNames.dms,
         nextRoute: RouteNames.criteria,
@@ -58,7 +58,7 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 3",
-        description: "Insira as Alternativas",
+        description: "Identifique as Alternativas",
         prevRoute: RouteNames.criteria,
         name: RouteNames.alternatives,
         nextRoute: RouteNames.scale,
@@ -73,8 +73,8 @@ export const ModelSteps: ModelProgressStep[] = [
       },
     ],
   },
-  { order: 2, label: "B", description: "Julgamentos", routes: [] },
-  { order: 3, label: "C", description: "Resultados", routes: [] },
+  { order: 2, label: "2", description: "Julgamentos", routes: [] },
+  { order: 3, label: "3", description: "Resultados", routes: [] },
 ];
 
 /**
