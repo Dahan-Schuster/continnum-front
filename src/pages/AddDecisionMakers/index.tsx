@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { Grid, IconButton, TextField } from "@mui/material";
+import { Grid, IconButton, TextField, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useModel } from "../../contexts/ModelContext";
 
 import config from "../../config.json";
+import CustomInputLabel from "../../components/CustomInputLabel";
 
 interface DecisionMakerInputsGroupProps {
   id?: string;
   name: string;
+	nameLabel?: string;
   weight: string;
+	weightLabel?: string;
   onChangeName: (value: string, decisionMakerId?: string) => void;
   onChangeWeight?: (value: string, decisionMakerId?: string) => void;
 	ActionButon: React.FC;
@@ -142,7 +145,7 @@ const AddDecisionMakers = () => {
         <Grid container spacing={1} p={1}>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Nome"
+							label={props.nameLabel}
               value={props.name}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 props.onChangeName(event.target.value, props.id);
@@ -152,8 +155,8 @@ const AddDecisionMakers = () => {
           </Grid>
           <Grid item xs={11} sm={5}>
             <TextField
-              label="Peso"
               value={props.weight}
+							label={props.weightLabel}
               onChange={
                 !!props.onChangeWeight
                   ? (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -178,13 +181,16 @@ const AddDecisionMakers = () => {
     <Grid container>
       <Grid item xs={12} mx="auto">
         <Grid container>
+					<CustomInputLabel text="Nome do decisor" xs={12} sm={6} />
+					<CustomInputLabel text="Peso" xs={12} sm={6} />
           {/* Mapeia os decisores cadastrados renderizando inputs de edição do nome e do peso  */}
-          {decisionMakers.map((dm) => (
+          {decisionMakers.map((dm, index) => (
             <DecisionMakerInputsGroup
               id={dm.id}
 							key={dm.id}
-              weight={String(dm.weight)}
               name={dm.name}
+							nameLabel={`#${index + 1}`}
+              weight={String(dm.weight)}
               onChangeName={(n, id) => handleDecisionMakerNameChange(n, id!)}
 							ActionButon={() => (
 								<IconButton
@@ -201,9 +207,10 @@ const AddDecisionMakers = () => {
         {/* Renderiza os inputs de cadastro de nove decisore */}
         <Grid item xs={12} mt={1}>
           <DecisionMakerInputsGroup
+            name={name}
+						nameLabel="Novo decisor"
             weight={weight}
             onChangeWeight={handleWeightChange}
-            name={name}
             onChangeName={handleNameChange}
 						ActionButon={() => (
               <IconButton
