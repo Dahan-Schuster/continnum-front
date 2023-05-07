@@ -29,7 +29,7 @@ export const ModelSteps: ModelProgressStep[] = [
   {
     order: 1,
     label: "A",
-    description: "Definir Problema",
+    description: "Problema",
     routes: [
       {
         step: 1,
@@ -73,7 +73,7 @@ export const ModelSteps: ModelProgressStep[] = [
       },
     ],
   },
-  { order: 2, label: "B", description: "Inserir Julgamentos", routes: [] },
+  { order: 2, label: "B", description: "Julgamentos", routes: [] },
   { order: 3, label: "C", description: "Resultados", routes: [] },
 ];
 
