@@ -194,6 +194,7 @@ const AddDecisionMakers = () => {
               onChangeName={(n, id) => handleDecisionMakerNameChange(n, id!)}
 							ActionButon={() => (
 								<IconButton
+									color="primary"
 									aria-label="delete"
 									onClick={() => deleteDecisionMaker(dm.id)}
 								>
@@ -214,6 +215,7 @@ const AddDecisionMakers = () => {
             onChangeName={handleNameChange}
 						ActionButon={() => (
               <IconButton
+								color="primary"
                 aria-label="Add Decision Maker"
                 onClick={handleAddDecisionMaker}
               >
