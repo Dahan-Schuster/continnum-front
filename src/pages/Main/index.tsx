@@ -1,5 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material";
-import { Box } from "@mui/system";
+import { Button, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import { Route, useNavigate } from "react-router-dom";
 import ReactSlideRoutes from "react-slide-routes";
@@ -11,6 +10,7 @@ import EntryPage from "./EntryPage";
 import AddCriteria from "../AddCriteria";
 import AddAlternatives from "../AddAlternatives";
 import SelectLinguisticScale from "../SelectLinguisticScale";
+import { Box, Container } from "@mui/system";
 
 interface MainPageProps {}
 
@@ -35,72 +35,50 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
   }, [currentRoute]);
 
   return (
-    <Grid container height="100vh">
-      <Grid item xs={12} height="fit-content">
+    <Container>
+      <Stack height="100vh" spacing={2} py={2}>
         <Header />
-      </Grid>
-      <Grid item xs={12} mb={2}>
-        <Typography
-          variant="h2"
-          textAlign={"center"}
-          fontSize={"1.5rem"}
-          fontWeight="bold"
-          textTransform={"capitalize"}
-        >
-          {currentRoute.label}
-        </Typography>
         <Typography
           component="p"
           textAlign={"center"}
-          fontSize={"1rem"}
+          fontSize={"1.5rem"}
+          color="text.primary"
         >
           {currentRoute.description}
         </Typography>
-      </Grid>
-      <Grid item xs={12} py={5} height="auto">
-        <Box
-          display={"flex"}
-          justifyContent="center"
-          alignItems={"center"}
-          px={1}
-        >
-          <ReactSlideRoutes duration={500}>
-            <Route index element={<EntryPage />} />
-            <Route path="/dms" element={<AddDecisionMakers />} />
-            <Route path="/criteria" element={<AddCriteria />} />
-            <Route path="/alternatives" element={<AddAlternatives />} />
-            <Route
-              path="/linguistic-scale"
-              element={<SelectLinguisticScale />}
-            />
-          </ReactSlideRoutes>
+        <Box flex={1} display="flex" alignItems="flex-start" py={5}>
+          <Box sx={{ width: "100%" }}>
+            <ReactSlideRoutes duration={500}>
+              <Route index element={<EntryPage />} />
+              <Route path="/dms" element={<AddDecisionMakers />} />
+              <Route path="/criteria" element={<AddCriteria />} />
+              <Route path="/alternatives" element={<AddAlternatives />} />
+              <Route
+                path="/linguistic-scale"
+                element={<SelectLinguisticScale />}
+              />
+            </ReactSlideRoutes>
+          </Box>
         </Box>
-      </Grid>
-      <Grid
-        item
-        xs={12}
-        px={5}
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={goBack}
-          disabled={!canGoBack}
-        >
-          Voltar
-        </Button>
-        <Button
-          variant="contained"
-          onClick={goForward}
-          disabled={!canGoForward}
-        >
-          Avançar
-        </Button>
-      </Grid>
-    </Grid>
+        <Box display="flex" justifyContent="space-between" alignItems="center">
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={goBack}
+            disabled={!canGoBack}
+          >
+            Voltar
+          </Button>
+          <Button
+            variant="contained"
+            onClick={goForward}
+            disabled={!canGoForward}
+          >
+            Avançar
+          </Button>
+        </Box>
+      </Stack>
+    </Container>
   );
 };
 
