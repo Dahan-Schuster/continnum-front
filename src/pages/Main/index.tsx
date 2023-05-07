@@ -57,7 +57,7 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
           {currentRoute.description}
         </Typography>
       </Grid>
-      <Grid item xs={12} mt={5} height="auto">
+      <Grid item xs={12} py={5} height="auto">
         <Box
           display={"flex"}
           justifyContent="center"
