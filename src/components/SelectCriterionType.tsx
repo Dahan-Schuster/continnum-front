@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import React from "react";
 import { CriterionType } from "../declarations";
 
@@ -17,12 +17,10 @@ const SelectCriterionType: React.FunctionComponent<
 > = ({ id, onChange, type, fullWidth = false }) => {
   return (
     <FormControl fullWidth>
-      <InputLabel id={id + "-label"}>Tipo</InputLabel>
       <Select
-        labelId={id + "-label"}
+				placeholder="Selecione o tipo"
         id={id}
         value={type}
-        label="Tipo"
         onChange={(e) => onChange(e.target.value as CriterionType)}
 				fullWidth={fullWidth}
       >
