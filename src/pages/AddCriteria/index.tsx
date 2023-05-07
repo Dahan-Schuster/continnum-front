@@ -9,12 +9,14 @@ import { CriterionType } from "../../declarations";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SelectCriterionType from "../../components/SelectCriterionType";
+import CustomInputLabel from "../../components/CustomInputLabel";
 
 interface AddCriteriaProps {}
 
 interface CriterionInputsGroupProps {
   id?: string;
   description: string;
+	descLabel?: string;
   type: CriterionType;
   onChangeName: (value: string, decisionMakerId?: string) => void;
   onChangeType: (value: CriterionType, decisionMakerId?: string) => void;
@@ -130,7 +132,7 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
         <Grid container spacing={1} p={1}>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Descricao"
+              label={props.descLabel}
               value={props.description}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 props.onChangeName!(event.target.value, props.id);
@@ -158,18 +160,21 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
   return (
     <Grid container>
       <Grid item xs={12} mx="auto">
+				<CustomInputLabel xs={12} sm={6} text={"Nome do critério"} />
         <Grid container>
           {/* Mapeia os critérios cadastrados renderizando inputs de edição do nome e do tipo  */}
-          {criteria.map((criterion) => (
+          {criteria.map((criterion, index) => (
             <CriterionInputsGroup
               id={criterion.id}
               key={criterion.id}
               description={criterion.description}
+							descLabel={`#${index + 1}`}
               onChangeName={(n, id) => handleCriterionDescriptionChange(n, id!)}
               type={criterion.criterion_type}
               onChangeType={(t, id) => handleCriterionTypeChange(t, id!)}
               ActionButon={() => (
                 <IconButton
+									color="primary"
                   aria-label="Adicionar critério"
                   onClick={() => deleteCriterion(criterion.id)}
                 >
@@ -183,11 +188,13 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
         <Grid item xs={12} mt={1}>
           <CriterionInputsGroup
             description={description}
+						descLabel="Novo critério"
             onChangeName={handleDescriptionChange}
             type={type}
             onChangeType={handleTypeChange}
             ActionButon={() => (
               <IconButton
+								color="primary"
                 aria-label="Adicionar critério"
                 onClick={handleAddCriterion}
               >
