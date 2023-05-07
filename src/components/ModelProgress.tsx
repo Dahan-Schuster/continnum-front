@@ -2,21 +2,21 @@ import { Grid, Box, Typography } from "@mui/material";
 import React from "react";
 import { useModel } from "../contexts/ModelContext";
 import { ModelSteps } from "../hooks/useModelSteps";
-import {useMuiTheme} from "../hooks/useMuiTheme";
+import { useMuiTheme } from "../hooks/useMuiTheme";
 
 interface ModelProgressProps {}
 
-const stepCircleSize = 25;
+const stepCircleSize = 42;
 
 /**
  * ModelProgress documentation
  */
 const ModelProgress: React.FunctionComponent<ModelProgressProps> = () => {
   const { currentStep } = useModel();
-	const { palette } = useMuiTheme();
+  const { palette } = useMuiTheme();
 
   return (
-    <Grid maxWidth={"sm"} container mx={"auto"} py={3}>
+    <Grid container maxWidth={"sm"} mx={"auto"} py={3}>
       {ModelSteps.map((step) => {
         const isDone = step.order < currentStep.order;
         const isCurrent = step.order === currentStep.order;
@@ -39,7 +39,10 @@ const ModelProgress: React.FunctionComponent<ModelProgressProps> = () => {
                 width: `${stepCircleSize}px`,
                 height: `${stepCircleSize}px`,
                 borderRadius: `${stepCircleSize / 2}px`,
-                borderColor: isCurrent || isDone ? palette.primary.main : palette.secondary.main,
+                borderColor:
+                  isCurrent || isDone
+                    ? palette.primary.main
+                    : palette.secondary.main,
                 backgroundColor: isDone ? palette.primary.main : "#fff",
                 borderWidth: 2,
                 borderStyle: "solid",
@@ -47,7 +50,13 @@ const ModelProgress: React.FunctionComponent<ModelProgressProps> = () => {
             >
               <Typography
                 component={"h2"}
-                color={isDone ? "primary.contrastText" : (isCurrent ? "primary.main" : "text.disabled")}
+                color={
+                  isDone
+                    ? "primary.contrastText"
+                    : isCurrent
+                    ? "primary.main"
+                    : "text.disabled"
+                }
               >
                 {step.label}
               </Typography>
@@ -56,7 +65,7 @@ const ModelProgress: React.FunctionComponent<ModelProgressProps> = () => {
               fontSize={"0.8rem"}
               component={"h3"}
               color={isCurrent || isDone ? "text.secondary" : "text.disabled"}
-							fontWeight={isCurrent ? "bold" : "normal"}
+              fontWeight={isCurrent ? "bold" : "normal"}
             >
               {step.description}
             </Typography>
