@@ -6,6 +6,15 @@ import { useModel } from "../../contexts/ModelContext";
 
 import config from "../../config.json";
 
+interface DecisionMakerInputsGroupProps {
+  id?: string;
+  name: string;
+  weight: string;
+  onChangeName: (value: string, decisionMakerId?: string) => void;
+  onChangeWeight?: (value: string, decisionMakerId?: string) => void;
+	ActionButon: React.FC;
+}
+
 /**
  * Página para adicionar tomadores de decisão ao contexto
  *
@@ -66,27 +75,24 @@ const AddDecisionMakers = () => {
     if (!validateNewTotalWeight(newWeight)) return;
 
     addDecisionMaker(name, newWeight);
-    setName("");
-    setWeight("");
+    setName("a");
+    setWeight("0.2");
   }, [addDecisionMaker, name, validateNewTotalWeight, weight]);
 
   /**
    * Callback de mudança do input de nome do novo DecisionMaker
    * Altera o valor do estado do nome
    */
-  const handleNameChange = React.useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      setName(event.target.value);
-    },
-    []
-  );
+  const handleNameChange = React.useCallback((value: string) => {
+    setName(value);
+  }, []);
 
   /**
    * Callback de mudança do input de peso do novo DecisionMaker
    * Altera o valor do estado do peso
    */
-  const handleWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setWeight(event.target.value);
+  const handleWeightChange = (value: string) => {
+    setWeight(value);
   };
 
   /**
@@ -94,8 +100,8 @@ const AddDecisionMakers = () => {
    * Altera o valor do objeto no estado, salvando o novo nome
    */
   const handleDecisionMakerNameChange = (
-    decisionMakerId: string,
-    newName: string
+    newName: string,
+    decisionMakerId: string
   ) => {
     setDecisionMakers(
       decisionMakers.map((dm) =>
@@ -105,8 +111,16 @@ const AddDecisionMakers = () => {
   };
 
   /**
+   * Libera o botão de voltar ao entrar na página
+   */
+  React.useEffect(() => {
+    setCanGoBack(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  /**
    * Efeito chamado sempre que o array de tomadores de decisão mudar
-   * Define se u usuárie pode avançar baseado no peso total dos decisores
+   * Define se u usuárie pode avançar baseado no peso total dus decisores
    */
   React.useEffect(() => {
     setCanGoForward(
@@ -114,13 +128,51 @@ const AddDecisionMakers = () => {
     );
   }, [setCanGoForward, totalDecisionMakersWeight]);
 
-	/**
-	 * Libera o botão de voltar ao entrar na página
-	 */
-  React.useEffect(() => {
-    setCanGoBack(true);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  /**
+   * Renderiza os inputs de cadastro ou edição de ume decisore
+   * Recebe nome, peso e os callbacks de edição dos inputs
+   *
+   * O callback de edição do input de  peso é opicional pois a
+   * edição do peso não é possível, sendo usado apenas no cadastro
+   */
+  const DecisionMakerInputsGroup = React.useCallback(
+    (props: DecisionMakerInputsGroupProps) => {
+			const { ActionButon } = props;
+      return (
+        <Grid container spacing={1} p={1}>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="Nome"
+              value={props.name}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                props.onChangeName(event.target.value, props.id);
+              }}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={11} sm={5}>
+            <TextField
+              label="Peso"
+              value={props.weight}
+              onChange={
+                !!props.onChangeWeight
+                  ? (event: React.ChangeEvent<HTMLInputElement>) => {
+                      props.onChangeWeight!(event.target.value, props.id);
+                    }
+                  : undefined
+              }
+              disabled={!props.onChangeWeight}
+              fullWidth
+            />
+          </Grid>
+          <Grid item xs={1} display="flex" alignItems="center">
+						<ActionButon />
+          </Grid>
+        </Grid>
+      );
+    },
+    []
+  );
 
   return (
     <Grid container>
@@ -128,56 +180,40 @@ const AddDecisionMakers = () => {
         <Grid container>
           {/* Mapeia os decisores cadastrados renderizando inputs de edição do nome e do peso  */}
           {decisionMakers.map((dm) => (
-            <Grid container mt={1}>
-              <Grid item xs={12} sm={6} pr={5}>
-                <TextField
-                  fullWidth
-                  label="Nome"
-                  value={dm.name}
-                  onChange={(e) =>
-                    handleDecisionMakerNameChange(dm.id, e.target.value)
-                  }
-                />
-              </Grid>
-              <Grid item xs={12} sm={5}>
-                <TextField label="Peso" value={dm.weight} fullWidth disabled />
-              </Grid>
-              <IconButton
-                aria-label="delete"
-                onClick={() => deleteDecisionMaker(dm.id)}
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Grid>
+            <DecisionMakerInputsGroup
+              id={dm.id}
+							key={dm.id}
+              weight={String(dm.weight)}
+              name={dm.name}
+              onChangeName={(n, id) => handleDecisionMakerNameChange(n, id!)}
+							ActionButon={() => (
+								<IconButton
+									aria-label="delete"
+									onClick={() => deleteDecisionMaker(dm.id)}
+								>
+									<DeleteIcon />
+								</IconButton>
+							)}
+            />
           ))}
         </Grid>
 
+        {/* Renderiza os inputs de cadastro de nove decisore */}
         <Grid item xs={12} mt={1}>
-          <Grid container>
-            <Grid item xs={12} sm={6} pr={5}>
-              {/* Inputs for new decision maker */}
-              <TextField
-                label="Nome"
-                value={name}
-                onChange={handleNameChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={5}>
-              <TextField
-                label="Peso"
-                value={weight}
-                onChange={handleWeightChange}
-                fullWidth
-              />
-            </Grid>
-            <IconButton
-              aria-label="Add Decision Maker"
-              onClick={handleAddDecisionMaker}
-            >
-              <AddIcon />
-            </IconButton>
-          </Grid>
+          <DecisionMakerInputsGroup
+            weight={weight}
+            onChangeWeight={handleWeightChange}
+            name={name}
+            onChangeName={handleNameChange}
+						ActionButon={() => (
+              <IconButton
+                aria-label="Add Decision Maker"
+                onClick={handleAddDecisionMaker}
+              >
+                <AddIcon />
+              </IconButton>
+						)}
+          />
         </Grid>
       </Grid>
     </Grid>
