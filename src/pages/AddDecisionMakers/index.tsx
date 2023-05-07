@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Grid, IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useModel } from "../../contexts/ModelContext";
