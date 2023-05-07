@@ -1,3 +1,4 @@
+import {Grid} from "@mui/material";
 import React from "react";
 import ModelProgress from "./ModelProgress";
 
@@ -8,9 +9,9 @@ interface HeaderProps {}
  */
 const Header: React.FunctionComponent<HeaderProps> = () => {
   return (
-    <div>
+    <Grid container width={"100%"}>
       <ModelProgress />
-    </div>
+    </Grid>
   );
 };
 
