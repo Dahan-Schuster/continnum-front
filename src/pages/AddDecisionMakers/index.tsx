@@ -180,7 +180,7 @@ const AddDecisionMakers = () => {
 							ActionButon={() => (
 								<IconButton
 									color="primary"
-									aria-label="delete"
+									aria-label="Deletar Decisor"
 									onClick={() => deleteDecisionMaker(dm.id)}
 								>
 									<DeleteIcon />
@@ -201,7 +201,7 @@ const AddDecisionMakers = () => {
 						ActionButon={() => (
               <IconButton
 								color="primary"
-                aria-label="Add Decision Maker"
+                aria-label="Addicionar decisor"
                 onClick={handleAddDecisionMaker}
               >
                 <AddIcon />
