@@ -66,7 +66,7 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 4",
-        description: "Escolha a Escala de Rermos Linguísticos a serem utilizados nos Julgamentos",
+        description: "Escolha a Escala de Termos Linguísticos a serem utilizados nos Julgamentos",
         prevRoute: RouteNames.alternatives,
         name: RouteNames.scale,
         nextRoute: RouteNames.void, // FIXME: rota para o próximo passo
