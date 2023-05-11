@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Grid,
-  IconButton,
-  TextField,
-} from "@mui/material";
+import { Grid, IconButton, TextField } from "@mui/material";
 import { useModel } from "../../contexts/ModelContext";
 import { CriterionType } from "../../declarations";
 import AddIcon from "@mui/icons-material/Add";
@@ -16,7 +12,7 @@ interface AddCriteriaProps {}
 interface CriterionInputsGroupProps {
   id?: string;
   description: string;
-	descLabel?: string;
+  descLabel?: string;
   type: CriterionType;
   onChangeName: (value: string, decisionMakerId?: string) => void;
   onChangeType: (value: CriterionType, decisionMakerId?: string) => void;
@@ -33,8 +29,8 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
     setCanGoForward,
     criteria,
     addCriterion,
-    setCriteria,
     deleteCriterion,
+    editCriterion,
   } = useModel();
 
   // valores dos inputs de nome e peso do novo tomador de decisão
@@ -69,36 +65,6 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
    */
   const handleTypeChange = (type: CriterionType) => {
     setType(type);
-  };
-
-  /**
-   * Callback de mudança do nome do Criterion já cadastrado
-   * Altera o valor do objeto no estado, salvando o novo nome
-   */
-  const handleCriterionDescriptionChange = (
-    newName: string,
-    criterionId: string
-  ) => {
-    setCriteria(
-      criteria.map((c) =>
-        c.id === criterionId ? { ...c, description: newName } : c
-      )
-    );
-  };
-
-  /**
-   * Callback de mudança do tipo do Criterion já cadastrado
-   * Altera o valor do objeto no estado, salvando o novo tipo
-   */
-  const handleCriterionTypeChange = (
-    newType: CriterionType,
-    criterionId: string
-  ) => {
-    setCriteria(
-      criteria.map((c) =>
-        c.id === criterionId ? { ...c, criterion_type: newType } : c
-      )
-    );
   };
 
   /**
@@ -160,7 +126,7 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
   return (
     <Grid container>
       <Grid item xs={12} mx="auto">
-				<CustomInputLabel xs={12} sm={6} text={"Nome do critério"} />
+        <CustomInputLabel xs={12} sm={6} text={"Nome do critério"} />
         <Grid container>
           {/* Mapeia os critérios cadastrados renderizando inputs de edição do nome e do tipo  */}
           {criteria.map((criterion, index) => (
@@ -168,13 +134,13 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
               id={criterion.id}
               key={criterion.id}
               description={criterion.description}
-							descLabel={`#${index + 1}`}
-              onChangeName={(n, id) => handleCriterionDescriptionChange(n, id!)}
+              descLabel={`#${index + 1}`}
+              onChangeName={(n, id) => editCriterion(id!, { description: n })}
               type={criterion.criterion_type}
-              onChangeType={(t, id) => handleCriterionTypeChange(t, id!)}
+              onChangeType={(t, id) => editCriterion(id!, { criterion_type: t })}
               ActionButon={() => (
                 <IconButton
-									color="primary"
+                  color="primary"
                   aria-label="Adicionar critério"
                   onClick={() => deleteCriterion(criterion.id)}
                 >
@@ -188,13 +154,13 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
         <Grid item xs={12} mt={1}>
           <CriterionInputsGroup
             description={description}
-						descLabel="Novo critério"
+            descLabel="Novo critério"
             onChangeName={handleDescriptionChange}
             type={type}
             onChangeType={handleTypeChange}
             ActionButon={() => (
               <IconButton
-								color="primary"
+                color="primary"
                 aria-label="Adicionar critério"
                 onClick={handleAddCriterion}
               >

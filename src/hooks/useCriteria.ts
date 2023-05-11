@@ -8,6 +8,7 @@ export interface CriteriaHookValues {
   addCriterion: (description: string, type: CriterionType) => void;
   setCriteria: (criteria: Criterion[]) => void;
   deleteCriterion: (id: string) => void;
+  editCriterion: (criterionId: string, newValues: Partial<Criterion>) => void;
 }
 
 /**
@@ -17,26 +18,27 @@ export interface CriteriaHookValues {
  * qualquer componente dentro do contexto
  */
 const useCriteria = (): CriteriaHookValues => {
-  const [criteria, setCriteria] = React.useState<Criterion[]>(
+  const [criteria, setCriteria] = React.useState<Criterion[]>([]);
+
+  /**
+   * Adiciona um critério à lista
+   * Utiliza o método produce da lib immer para garantir que propriedades dentro do objeto
+   * irão ser salvas com êxito
+   */
+  const addCriterion = React.useCallback(
+    (description: string, type: CriterionType) => {
+      setCriteria(
+        produce((draft) => {
+          draft.push({
+            id: uuidv4(),
+            description,
+            criterion_type: type,
+          });
+        })
+      );
+    },
     []
   );
-	
-	/**
-	 * Adiciona um critério à lista
-	 * Utiliza o método produce da lib immer para garantir que propriedades dentro do objeto
-	 * irão ser salvas com êxito
-	 */
-  const addCriterion = React.useCallback((description: string, type: CriterionType) => {
-    setCriteria(
-      produce((draft) => {
-        draft.push({
-          id: uuidv4(),
-          description,
-          criterion_type: type,
-        });
-      })
-    );
-  }, []);
 
   /**
    * Deleta um Criterion da lista a partir de seu ID
@@ -49,12 +51,28 @@ const useCriteria = (): CriteriaHookValues => {
     );
   }, []);
 
+	/**
+	 * Edita um critério a partir de seu ID
+	 */
+  const editCriterion = React.useCallback(
+    (criterionId: string, newValues: Partial<Criterion>) => {
+      setCriteria(
+        produce((draft) => {
+          return draft.map((c) =>
+            c.id === criterionId ? { ...c, ...newValues } : c
+          );
+        })
+      );
+    },
+    []
+  );
 
   return {
     criteria,
     addCriterion,
     deleteCriterion,
     setCriteria,
+    editCriterion,
   };
 };
 
