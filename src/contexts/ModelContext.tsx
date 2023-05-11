@@ -1,5 +1,6 @@
 import React from "react";
 import { Alternative } from "../declarations";
+import useAlternatives, {AlternativesHookValues} from "../hooks/useAlternatives";
 import useCriteria, { CriteriaHookValues } from "../hooks/useCriteria";
 import useDecisionMakers, {
   DecisionMakersHookValues,
@@ -16,6 +17,7 @@ const ModelContext = React.createContext<
   | (ModelContextValue &
       DecisionMakersHookValues &
       CriteriaHookValues &
+      AlternativesHookValues &
       ModelStepsHookValues)
   | null
 >(null);
@@ -28,20 +30,18 @@ export default ModelContext;
 export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [alternatives, setAlternatives] = React.useState<Alternative[]>([]);
-
   const modelStepsUtils = useModelSteps();
   const decisionMakersUtils = useDecisionMakers();
   const criteriaUtils = useCriteria();
+  const alternativesUtils = useAlternatives();
 
   return (
     <ModelContext.Provider
       value={{
-        alternatives,
-        setAlternatives,
         ...modelStepsUtils,
         ...decisionMakersUtils,
         ...criteriaUtils,
+				...alternativesUtils,
       }}
     >
       {children}
