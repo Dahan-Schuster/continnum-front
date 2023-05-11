@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Grid, IconButton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useModel } from "../../contexts/ModelContext";
@@ -35,9 +35,9 @@ const AddDecisionMakers = () => {
     setCanGoForward,
     decisionMakers,
     addDecisionMaker,
-    setDecisionMakers,
     deleteDecisionMaker,
     totalDecisionMakersWeight,
+		editDecisionMaker,
   } = useModel();
 
   // valores dos inputs de nome e peso do novo tomador de decisão
@@ -78,8 +78,8 @@ const AddDecisionMakers = () => {
     if (!validateNewTotalWeight(newWeight)) return;
 
     addDecisionMaker(name, newWeight);
-    setName("a");
-    setWeight("0.2");
+    setName("");
+    setWeight("");
   }, [addDecisionMaker, name, validateNewTotalWeight, weight]);
 
   /**
@@ -96,21 +96,6 @@ const AddDecisionMakers = () => {
    */
   const handleWeightChange = (value: string) => {
     setWeight(value);
-  };
-
-  /**
-   * Callback de mudança do nome do DecisionMaker já cadastrado
-   * Altera o valor do objeto no estado, salvando o novo nome
-   */
-  const handleDecisionMakerNameChange = (
-    newName: string,
-    decisionMakerId: string
-  ) => {
-    setDecisionMakers(
-      decisionMakers.map((dm) =>
-        dm.id === decisionMakerId ? { ...dm, name: newName } : dm
-      )
-    );
   };
 
   /**
@@ -191,7 +176,7 @@ const AddDecisionMakers = () => {
               name={dm.name}
 							nameLabel={`#${index + 1}`}
               weight={String(dm.weight)}
-              onChangeName={(n, id) => handleDecisionMakerNameChange(n, id!)}
+              onChangeName={(n, id) => editDecisionMaker(id!, { name: n })}
 							ActionButon={() => (
 								<IconButton
 									color="primary"

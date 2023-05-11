@@ -8,10 +8,11 @@ export interface DecisionMakersHookValues {
   addDecisionMaker: (name: string, weight: number) => void;
   setDecisionMakers: (dms: DecisionMaker[]) => void;
   deleteDecisionMaker: (decisionMakerId: string) => void;
+  editDecisionMaker: (decisionMakerId: string, newValues: Partial<DecisionMaker>) => void;
   totalDecisionMakersWeight: number;
-  addCriterionJudgmentFromDecisionMaker: (
+  addDecisionMakerJudgmentFromDecisionMaker: (
     decisionMakerId: string,
-    criterionJudgment: CriterionJudgment
+    decisionMakerJudgment: CriterionJudgment
   ) => void;
 }
 
@@ -66,7 +67,7 @@ const useDecisionMakers = (): DecisionMakersHookValues => {
     return totalWeight;
   }, [decisionMakers]);
 
-  const addCriterionJudgmentFromDecisionMaker = React.useCallback(
+  const addDecisionMakerJudgmentFromDecisionMaker = React.useCallback(
     (decisionMakerId: string, { criterion_id, sp, sq }: CriterionJudgment) => {
       setDecisionMakers(
         produce((draft) => {
@@ -84,13 +85,30 @@ const useDecisionMakers = (): DecisionMakersHookValues => {
     []
   );
 
+	/**
+	 * Edita um decisore a partir de seu ID
+	 */
+  const editDecisionMaker = React.useCallback(
+    (decisionMakerId: string, newValues: Partial<DecisionMaker>) => {
+      setDecisionMakers(
+        produce((draft) => {
+          return draft.map((c) =>
+            c.id === decisionMakerId ? { ...c, ...newValues } : c
+          );
+        })
+      );
+    },
+    []
+  );
+
 	return {
 		decisionMakers,
 		addDecisionMaker,
 		deleteDecisionMaker,
+		editDecisionMaker,
 		setDecisionMakers,
 		totalDecisionMakersWeight,
-		addCriterionJudgmentFromDecisionMaker,
+		addDecisionMakerJudgmentFromDecisionMaker,
 	};
 };
 
