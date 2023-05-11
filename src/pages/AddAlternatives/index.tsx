@@ -54,7 +54,7 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
   }, []);
 
   /**
-   * Efeito chamado sempre que o array de critérios mudar
+   * Efeito chamado sempre que o array de alternativas mudar
    * Define se u usuárie pode avançar baseado no tamanho do array de alternativas
    */
   React.useEffect(() => {
@@ -71,7 +71,7 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
   }, []);
 
   /**
-   * Renderiza os inputs de cadastro ou edição de um critério
+   * Renderiza os inputs de cadastro ou edição de uma alternativa
    * Recebe nome, tipo e os callbacks de edição dos inputs
    */
   const AlternativeInputsGroup = React.useCallback(
@@ -102,9 +102,9 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
   return (
     <Grid container>
       <Grid item xs={12} mx="auto">
-        <CustomInputLabel xs={12} sm={6} text={"Nome do critério"} />
+        <CustomInputLabel xs={12} sm={6} text={"Nome da alternativa"} />
         <Grid container>
-          {/* Mapeia os critérios cadastrados renderizando inputs de edição do nome e do tipo  */}
+          {/* Mapeia as alternativas cadastrados renderizando inputs de edição do nome e do tipo  */}
           {alternatives.map((alternative, index) => (
             <AlternativeInputsGroup
               id={alternative.id}
