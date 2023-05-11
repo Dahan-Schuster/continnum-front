@@ -141,7 +141,7 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
               ActionButon={() => (
                 <IconButton
                   color="primary"
-                  aria-label="Adicionar critério"
+                  aria-label="Deletar critério"
                   onClick={() => deleteCriterion(criterion.id)}
                 >
                   <DeleteIcon />
