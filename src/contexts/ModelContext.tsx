@@ -5,6 +5,7 @@ import useCriteria, { CriteriaHookValues } from "../hooks/useCriteria";
 import useDecisionMakers, {
   DecisionMakersHookValues,
 } from "../hooks/useDecisionMakers";
+import useModelScale, {ModelScaleHookValues} from "../hooks/useModelScale";
 
 import useModelSteps, { ModelStepsHookValues } from "../hooks/useModelSteps";
 
@@ -18,7 +19,8 @@ const ModelContext = React.createContext<
       DecisionMakersHookValues &
       CriteriaHookValues &
       AlternativesHookValues &
-      ModelStepsHookValues)
+      ModelStepsHookValues &
+			ModelScaleHookValues)
   | null
 >(null);
 export default ModelContext;
@@ -31,6 +33,7 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const modelStepsUtils = useModelSteps();
+  const modelScaleUtils = useModelScale();
   const decisionMakersUtils = useDecisionMakers();
   const criteriaUtils = useCriteria();
   const alternativesUtils = useAlternatives();
@@ -38,6 +41,7 @@ export const ModelProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <ModelContext.Provider
       value={{
+				...modelScaleUtils,
         ...modelStepsUtils,
         ...decisionMakersUtils,
         ...criteriaUtils,
