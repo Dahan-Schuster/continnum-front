@@ -1,3 +1,7 @@
+export type Dictionary<T> = {
+	[key: string]: T
+}
+
 export interface CriterionJudgment {
   criterion_id: string; // criterion being judged by the DecisionMaker
   sp: Number; // "lower" value of the fuzzy judgement
