@@ -1,22 +1,12 @@
 import React, { useState } from "react";
-import { Grid, IconButton, TextField, Typography } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useModel } from "../../contexts/ModelContext";
 
 import config from "../../config.json";
 import CustomInputLabel from "../../components/CustomInputLabel";
-
-interface DecisionMakerInputsGroupProps {
-  id?: string;
-  name: string;
-  nameLabel?: string;
-  weight: string;
-  weightLabel?: string;
-  onChangeName: (value: string, decisionMakerId?: string) => void;
-  onChangeWeight?: (value: string, decisionMakerId?: string) => void;
-  ActionButon: React.FC;
-}
+import DecisionMakerInputsGroup from "./DecisionMakersInputsGroup";
 
 /**
  * Página para adicionar tomadores de decisão ao contexto
@@ -38,9 +28,10 @@ const AddDecisionMakers = () => {
     deleteDecisionMaker,
     totalDecisionMakersWeight,
     editDecisionMaker,
-		validationMessage,
     setValidationMessage,
   } = useModel();
+
+  const newDecisionMakerInputRef = React.useRef<HTMLInputElement>(null);
 
   // valores dos inputs de nome e peso do novo tomador de decisão
   const [name, setName] = useState("");
@@ -82,6 +73,7 @@ const AddDecisionMakers = () => {
     addDecisionMaker(name, newWeight);
     setName("");
     setWeight("");
+    newDecisionMakerInputRef.current?.focus();
   }, [addDecisionMaker, name, validateNewTotalWeight, weight]);
 
   /**
@@ -126,52 +118,6 @@ const AddDecisionMakers = () => {
     );
   }, [setCanGoForward, totalDecisionMakersWeight]);
 
-  /**
-   * Renderiza os inputs de cadastro ou edição de ume decisore
-   * Recebe nome, peso e os callbacks de edição dos inputs
-   *
-   * O callback de edição do input de  peso é opicional pois a
-   * edição do peso não é possível, sendo usado apenas no cadastro
-   */
-  const DecisionMakerInputsGroup = React.useCallback(
-    (props: DecisionMakerInputsGroupProps) => {
-      const { ActionButon } = props;
-      return (
-        <Grid container spacing={1} p={1}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label={props.nameLabel}
-              value={props.name}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                props.onChangeName(event.target.value, props.id);
-              }}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={11} sm={5}>
-            <TextField
-              value={props.weight}
-              label={props.weightLabel}
-              onChange={
-                !!props.onChangeWeight
-                  ? (event: React.ChangeEvent<HTMLInputElement>) => {
-                      props.onChangeWeight!(event.target.value, props.id);
-                    }
-                  : undefined
-              }
-              disabled={!props.onChangeWeight}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={1} display="flex" alignItems="center">
-            <ActionButon />
-          </Grid>
-        </Grid>
-      );
-    },
-    []
-  );
-
   return (
     <Grid container>
       <Grid item xs={12} mx="auto">
@@ -203,6 +149,7 @@ const AddDecisionMakers = () => {
         {/* Renderiza os inputs de cadastro de nove decisore */}
         <Grid item xs={12} mt={1}>
           <DecisionMakerInputsGroup
+            ref={newDecisionMakerInputRef}
             name={name}
             nameLabel="Novo decisor"
             weight={weight}
