@@ -1,4 +1,4 @@
-import { Button, Grid, Stack, Typography } from "@mui/material";
+import { Button, Grid, Stack, Tooltip, Typography } from "@mui/material";
 import React from "react";
 import { Route, useNavigate } from "react-router-dom";
 import ReactSlideRoutes from "react-slide-routes";
@@ -19,8 +19,14 @@ interface MainPageProps {}
  */
 const MainPage: React.FunctionComponent<MainPageProps> = () => {
   // dados do modelo
-  const { goForward, goBack, canGoBack, canGoForward, currentRoute } =
-    useModel();
+  const {
+    goForward,
+    goBack,
+    canGoBack,
+    canGoForward,
+    currentRoute,
+    validationMessage,
+  } = useModel();
 
   // Método para navegar pra a próxima tela
   const navigate = useNavigate();
@@ -46,6 +52,14 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
         >
           {currentRoute.description}
         </Typography>
+        <Typography
+          component="p"
+          textAlign={"center"}
+          fontSize={"1.0rem"}
+          color="text.secondary"
+        >
+          {validationMessage}
+        </Typography>
         <Box flex={1} display="flex" alignItems="flex-start" py={5}>
           <Box sx={{ width: "100%" }}>
             <ReactSlideRoutes duration={500}>
@@ -62,20 +76,21 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
         </Box>
         <Box display="flex" justifyContent="space-between" alignItems="center">
           <Button
-            variant="contained"
-            color="secondary"
-            onClick={goBack}
-            disabled={!canGoBack}
+            variant={canGoBack ? "contained" : "outlined"}
+            onClick={canGoBack ? goBack : undefined}
+            color={canGoBack ? "primary" : "secondary"}
           >
             Voltar
           </Button>
-          <Button
-            variant="contained"
-            onClick={goForward}
-            disabled={!canGoForward}
-          >
-            Avançar
-          </Button>
+          <Tooltip title={validationMessage}>
+            <Button
+              variant={canGoForward ? "contained" : "outlined"}
+              onClick={canGoForward ? goForward : undefined}
+              color={canGoForward ? "primary" : "secondary"}
+            >
+              Avançar
+            </Button>
+          </Tooltip>
         </Box>
       </Stack>
     </Container>
