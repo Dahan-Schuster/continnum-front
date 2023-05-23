@@ -7,12 +7,20 @@
   "commitConvention": "angular",
   "contributors": [
     {
+      "login": "viviane-ruotolo",
+      "name": "Viviane Ruotolo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62677489?v=4",
+      "profile": "https://github.com/viviane-ruotolo",
+      "contributions": [
+        "code"
+    }, {
       "login": "tainarasn",
       "name": "Tainara Novaes",
       "avatar_url": "https://avatars.githubusercontent.com/u/62676080?v=4",
       "profile": "https://tainarasnsba.wixsite.com/tainara-novaes",
       "contributions": [
-        "design"
+        "design",
+        "code"
       ]
     }
   ],

@@ -38,24 +38,6 @@ git checkout develop
 yarn start
 ```
 
-## Colaboradores:
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
-<table>
-  <tbody>
-    <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://tainarasnsba.wixsite.com/tainara-novaes"><img src="https://avatars.githubusercontent.com/u/62676080?v=4?s=100" width="100px;" alt="Tainara Novaes"/><br /><sub><b>Tainara Novaes</b></sub></a><br /><a href="#design-tainarasn" title="Design">🎨</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<!-- markdownlint-restore -->
-<!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -63,6 +45,14 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/viviane-ruotolo"><img src="https://avatars.githubusercontent.com/u/62677489?v=4?s=100" width="100px;" alt="Viviane Ruotolo"/><br /><sub><b>Viviane Ruotolo</b></sub></a><br /><a href="https://github.com/Dahan-Schuster/continnum-front/commits?author=viviane-ruotolo" title="Code">💻</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://tainarasnsba.wixsite.com/tainara-novaes"><img src="https://avatars.githubusercontent.com/u/62676080?v=4?s=100" width="100px;" alt="Tainara Novaes"/><br /><sub><b>Tainara Novaes</b></sub></a><br /><a href="#design-tainarasn" title="Design">🎨</a></td>
+    </tr>
+  </tbody>
+</table>
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
