@@ -1,5 +1,5 @@
 # Continnum - Software de tomada de decisões
-![continnum](ttps://img.shields.io/github/languages/top/dahan-schuster/continnum-front)
+![continnum](https://img.shields.io/github/languages/top/dahan-schuster/continnum-front)
 
 ## Description
 
