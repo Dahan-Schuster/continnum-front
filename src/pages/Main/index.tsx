@@ -90,7 +90,18 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
             >
               Voltar
             </Button>
-            <Tooltip title={validationMessage}>
+            <Tooltip
+              title={
+                <Typography
+                  component="p"
+                  textAlign={"center"}
+                  fontSize={"0.8rem"}
+                  color="background"
+                >
+                  {validationMessage}
+                </Typography>
+              }
+            >
               <Button
                 variant={canGoForward ? "contained" : "outlined"}
                 onClick={canGoForward ? goForward : undefined}
