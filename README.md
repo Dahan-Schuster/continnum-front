@@ -1,4 +1,4 @@
-# Continnum - Software de tomada de decisões
+# Continnum - Decision Making Tool
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
@@ -6,33 +6,33 @@
 
 ## Description
 
-Front-end do software Continumm
+Front-end of the Continnum software
 
-## Instalação (dev)
+## Installation (dev)
 
-1. Clone o projeto:
+1. Clone the repository:
 
 ```sh
 git clone git@github.com:Dahan-Schuster/continnum-front
 ```
 
-2. Instale as dependências usando yarn:
+2. Install dependencies using yarn:
 
 ```sh
 yarn
 ```
 
-3. Verifique as branchs disponíveis e mude para a de desenvolvimento:
+3. Check for available branches and checout to develop:
 
 ```sh
-# irá baixar e listar todas as branchs disponíveis
+# will get all available branches
 git fetch -v --all
 
-# muda para a branch de desenvolvimento
+# go to the development branch
 git checkout develop
 ```
 
-4. Inicie o ambiente de desenvolvimento:
+4. Start the development server:
 
 ```sh
 yarn start
@@ -40,7 +40,7 @@ yarn start
 
 ## Contributors ✨
 
-Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+Thanks for these amazing project colleagues:
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -56,5 +56,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Contributions badges made by [emoji key](https://allcontributors.org/docs/en/emoji-key)
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
