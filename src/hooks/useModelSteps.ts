@@ -101,6 +101,9 @@ export interface ModelStepsHookValues {
   setCanGoForward: (doesIt: boolean) => void;
   canGoBack: boolean;
   setCanGoBack: (doesIt: boolean) => void;
+
+	validationMessage: string;
+	setValidationMessage: (message: string) => void;
 }
 
 /**
@@ -132,6 +135,9 @@ const useModelSteps = (): ModelStepsHookValues => {
   // estados que informam se deve permitir avançar ou voltar no modelo
   const [canGoForward, setCanGoForward] = React.useState<boolean>(false);
   const [canGoBack, setCanGoBack] = React.useState<boolean>(false);
+
+	// mensagem de aviso ao usuário sobre não poder avançar
+	const [validationMessage, setValidationMessage] = React.useState<string>("");
 
   /**
    * Altera o estado da rota atual para a próxima rota, se houver
@@ -182,6 +188,8 @@ const useModelSteps = (): ModelStepsHookValues => {
     setCanGoForward,
     canGoBack,
     setCanGoBack,
+		validationMessage,
+		setValidationMessage,
   };
 };
 
