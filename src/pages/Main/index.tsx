@@ -11,6 +11,7 @@ import AddCriteria from "../AddCriteria";
 import AddAlternatives from "../AddAlternatives";
 import SelectLinguisticScale from "../SelectLinguisticScale";
 import { Box, Container } from "@mui/system";
+import { useMuiTheme } from "../../hooks/useMuiTheme";
 
 interface MainPageProps {}
 
@@ -40,60 +41,68 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentRoute]);
 
+  const { palette } = useMuiTheme();
+
   return (
-    <Container>
-      <Stack height="100vh" spacing={2} py={2}>
-        <Header />
-        <Typography
-          component="p"
-          textAlign={"center"}
-          fontSize={"1.5rem"}
-          color="text.primary"
-        >
-          {currentRoute.description}
-        </Typography>
-        <Typography
-          component="p"
-          textAlign={"center"}
-          fontSize={"1.0rem"}
-          color="text.secondary"
-        >
-          {validationMessage}
-        </Typography>
-        <Box flex={1} display="flex" alignItems="flex-start" py={5}>
-          <Box sx={{ width: "100%" }}>
-            <ReactSlideRoutes duration={500}>
-              <Route index element={<EntryPage />} />
-              <Route path="/dms" element={<AddDecisionMakers />} />
-              <Route path="/criteria" element={<AddCriteria />} />
-              <Route path="/alternatives" element={<AddAlternatives />} />
-              <Route
-                path="/linguistic-scale"
-                element={<SelectLinguisticScale />}
-              />
-            </ReactSlideRoutes>
-          </Box>
-        </Box>
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Button
-            variant={canGoBack ? "contained" : "outlined"}
-            onClick={canGoBack ? goBack : undefined}
-            color={canGoBack ? "primary" : "secondary"}
+    <Box sx={{ backgroundColor: palette.background.default }}>
+      <Container>
+        <Stack height="100vh" spacing={2} py={2}>
+          <Header />
+          <Typography
+            component="p"
+            textAlign={"center"}
+            fontSize={"1.5rem"}
+            color="text.primary"
           >
-            Voltar
-          </Button>
-          <Tooltip title={validationMessage}>
+            {currentRoute.description}
+          </Typography>
+          <Typography
+            component="p"
+            textAlign={"center"}
+            fontSize={"1.0rem"}
+            color="text.secondary"
+          >
+            {validationMessage}
+          </Typography>
+          <Box flex={1} display="flex" alignItems="flex-start" py={5}>
+            <Box sx={{ width: "100%" }}>
+              <ReactSlideRoutes duration={500}>
+                <Route index element={<EntryPage />} />
+                <Route path="/dms" element={<AddDecisionMakers />} />
+                <Route path="/criteria" element={<AddCriteria />} />
+                <Route path="/alternatives" element={<AddAlternatives />} />
+                <Route
+                  path="/linguistic-scale"
+                  element={<SelectLinguisticScale />}
+                />
+              </ReactSlideRoutes>
+            </Box>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <Button
-              variant={canGoForward ? "contained" : "outlined"}
-              onClick={canGoForward ? goForward : undefined}
-              color={canGoForward ? "primary" : "secondary"}
+              variant={canGoBack ? "contained" : "outlined"}
+              onClick={canGoBack ? goBack : undefined}
+              color={canGoBack ? "primary" : "secondary"}
             >
-              Avançar
+              Voltar
             </Button>
-          </Tooltip>
-        </Box>
-      </Stack>
-    </Container>
+            <Tooltip title={validationMessage}>
+              <Button
+                variant={canGoForward ? "contained" : "outlined"}
+                onClick={canGoForward ? goForward : undefined}
+                color={canGoForward ? "primary" : "secondary"}
+              >
+                Avançar
+              </Button>
+            </Tooltip>
+          </Box>
+        </Stack>
+      </Container>
+    </Box>
   );
 };
 

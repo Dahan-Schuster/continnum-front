@@ -12,6 +12,9 @@ export const useMuiTheme = () => {
     palette: {
       // mode: 'dark',
 
+			background: {
+				default: "#fbfbfb"
+			},
       primary: {
         main: "#FF715B",
 				light: "#ffeeed",
