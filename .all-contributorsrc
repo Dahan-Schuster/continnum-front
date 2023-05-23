@@ -1,0 +1,25 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "commitConvention": "angular",
+  "contributors": [
+    {
+      "login": "viviane-ruotolo",
+      "name": "Viviane Ruotolo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62677489?v=4",
+      "profile": "https://github.com/viviane-ruotolo",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "skipCi": true,
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "projectName": "continnum-front",
+  "projectOwner": "Dahan-Schuster"
+}
