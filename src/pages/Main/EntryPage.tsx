@@ -15,11 +15,12 @@ const useStyles = makeStyles(() => ({
 
 const EntryPage = () => {
   const classes = useStyles();
-  const { setCanGoForward, setCanGoBack } = useModel();
+  const { setCanGoForward, setCanGoBack, setValidationMessage } = useModel();
 
   React.useEffect(() => {
     setCanGoForward(true);
     setCanGoBack(false);
+		setValidationMessage("");
   }, [setCanGoBack, setCanGoForward]);
 
   return (
