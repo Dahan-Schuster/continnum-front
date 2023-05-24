@@ -18,9 +18,7 @@ const EntryPage = () => {
   const { setCanGoForward, setCanGoBack, setValidationMessage } = useModel();
 
   React.useEffect(() => {
-    setCanGoForward(true);
-    setCanGoBack(false);
-		setValidationMessage("");
+    setValidationMessage("");
   }, [setCanGoBack, setCanGoForward]);
 
   return (

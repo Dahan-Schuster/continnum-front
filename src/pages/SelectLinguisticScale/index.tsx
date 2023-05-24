@@ -18,7 +18,7 @@ interface SelectLinguisticScaleProps {}
 const SelectLinguisticScale: React.FunctionComponent<
   SelectLinguisticScaleProps
 > = () => {
-  const { linguisticScale, selectLinguisticScale } = useModel();
+  const { setCanGoBack, linguisticScale, selectLinguisticScale } = useModel();
 
   /**
    * Callback de mudança do RadioGroup
@@ -30,6 +30,10 @@ const SelectLinguisticScale: React.FunctionComponent<
     },
     [selectLinguisticScale]
   );
+
+	React.useEffect(() => {
+		setCanGoBack(true)
+	}, []);
 
   return (
     <Box display="flex" justifyContent="center">
