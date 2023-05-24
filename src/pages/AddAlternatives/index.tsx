@@ -4,6 +4,7 @@ import { useModel } from "../../contexts/ModelContext";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomInputLabel from "../../components/CustomInputLabel";
+import config from "../../config.json";
 
 interface AddAlternativesProps {}
 
@@ -27,6 +28,7 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
     addAlternative,
     deleteAlternative,
     editAlternative,
+    setValidationMessage,
   } = useModel();
 
   // valor do input de nome da nova alternativa
@@ -58,7 +60,11 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
    * Define se u usuárie pode avançar baseado no tamanho do array de alternativas
    */
   React.useEffect(() => {
-    setCanGoForward(alternatives.length > 0);
+    const _canGoForward = alternatives.length > 0;
+    setCanGoForward(_canGoForward);
+    setValidationMessage(
+      _canGoForward ? "" : config.alternativesValidationMessage
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [alternatives]);
 

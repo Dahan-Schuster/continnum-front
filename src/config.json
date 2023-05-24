@@ -3,5 +3,6 @@
 	"description": "",
 	"requiredDecisionMakersWeight": 1,
 	"decisionMakersValidationMessage": "A soma dos pesos dos decisores deve ser igual a 1. A soma atual é: {x}",
-	"criteriaValidationMessage": "Adicione um ou mais critérios"
+	"criteriaValidationMessage": "Adicione um ou mais critérios",
+	"alternativesValidationMessage": "Adicione uma ou mais alternativas"
 }
