@@ -1,29 +1,14 @@
 import React from "react";
-
-export interface ModelRoute {
-  step: number; // identificador do ModelProgressStep associado a essa rota, deve ser igual ao order
-  label: string;
-  description: string;
-  name: string;
-  nextRoute: string;
-  prevRoute: string;
-}
-
-export interface ModelProgressStep {
-  order: number; // identificador desse Step
-  label: string;
-  description: string;
-  routes: ModelRoute[];
-}
+import { ModelProgressStep, ModelRoute } from "../declarations/model";
 
 export const RouteNames = {
-	void: '',
-	model: '/model/',
-	dms: '/model/dms',
-	criteria: '/model/criteria',
-	alternatives: '/model/alternatives',
-	scale: '/model/linguistic-scale',
-}
+  void: "",
+  model: "/model/",
+  dms: "/model/dms",
+  criteria: "/model/criteria",
+  alternatives: "/model/alternatives",
+  scale: "/model/linguistic-scale",
+};
 
 export const ModelSteps: ModelProgressStep[] = [
   {
@@ -66,7 +51,8 @@ export const ModelSteps: ModelProgressStep[] = [
       {
         step: 1,
         label: "passo 4",
-        description: "Escolha a Escala de Termos Linguísticos a serem utilizados nos Julgamentos",
+        description:
+          "Escolha a Escala de Termos Linguísticos a serem utilizados nos Julgamentos",
         prevRoute: RouteNames.alternatives,
         name: RouteNames.scale,
         nextRoute: RouteNames.void, // FIXME: rota para o próximo passo
@@ -102,8 +88,8 @@ export interface ModelStepsHookValues {
   canGoBack: boolean;
   setCanGoBack: (doesIt: boolean) => void;
 
-	validationMessage: string;
-	setValidationMessage: (message: string) => void;
+  validationMessage: string;
+  setValidationMessage: (message: string) => void;
 }
 
 /**
@@ -136,8 +122,8 @@ const useModelSteps = (): ModelStepsHookValues => {
   const [canGoForward, setCanGoForward] = React.useState<boolean>(false);
   const [canGoBack, setCanGoBack] = React.useState<boolean>(false);
 
-	// mensagem de aviso ao usuário sobre não poder avançar
-	const [validationMessage, setValidationMessage] = React.useState<string>("");
+  // mensagem de aviso ao usuário sobre não poder avançar
+  const [validationMessage, setValidationMessage] = React.useState<string>("");
 
   /**
    * Altera o estado da rota atual para a próxima rota, se houver
@@ -182,14 +168,14 @@ const useModelSteps = (): ModelStepsHookValues => {
     currentStep,
     currentRoute,
     goForward,
-		goBack,
+    goBack,
     setCurrentRoute,
     canGoForward,
     setCanGoForward,
     canGoBack,
     setCanGoBack,
-		validationMessage,
-		setValidationMessage,
+    validationMessage,
+    setValidationMessage,
   };
 };
 

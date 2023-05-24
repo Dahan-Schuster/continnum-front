@@ -1,11 +1,8 @@
 import React from "react";
-import { Dictionary } from "../declarations";
-
-interface ILinguisticScale {
-  id: number;
-  size: number;
-  values: Dictionary<number>;
-}
+import {
+  Dictionary,
+  LinguisticScale as ILinguisticScale,
+} from "../declarations";
 
 class LinguisticScale implements ILinguisticScale {
   id: number;
