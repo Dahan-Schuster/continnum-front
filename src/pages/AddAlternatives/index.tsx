@@ -1,20 +1,13 @@
 import React from "react";
-import { Grid, IconButton, TextField } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { useModel } from "../../contexts/ModelContext";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CustomInputLabel from "../../components/CustomInputLabel";
 import config from "../../config.json";
+import AlternativeInputsGroup from "./AlternativeInputsGroup";
 
 interface AddAlternativesProps {}
-
-interface AlternativeInputsGroupProps {
-  id?: string;
-  name: string;
-  descLabel?: string;
-  onChangeName: (value: string, decisionMakerId?: string) => void;
-  ActionButon: React.FC;
-}
 
 /**
  * Tela para cadastrar, editar, deletar e listar Alternativas do modelo
@@ -47,6 +40,16 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
     setName("");
   }, [addAlternative, name]);
 
+  const alternativeNameInputRef = React.useRef<HTMLInputElement>(null);
+
+  /**
+   * Foca o input de nome do novo Criterion sempre que o tamanho da
+   * lista mudar (adicionou ou removeu DMs)
+   */
+  React.useEffect(() => {
+    alternativeNameInputRef.current?.focus();
+  }, [alternatives.length]);
+
   /**
    * Callback de mudança do input de nome do novo Alternative
    * Altera o valor do estado do nome
@@ -76,35 +79,6 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /**
-   * Renderiza os inputs de cadastro ou edição de uma alternativa
-   * Recebe nome, tipo e os callbacks de edição dos inputs
-   */
-  const AlternativeInputsGroup = React.useCallback(
-    (props: AlternativeInputsGroupProps) => {
-      const { ActionButon } = props;
-
-      return (
-        <Grid container spacing={1} p={1}>
-          <Grid item xs={11}>
-            <TextField
-              label={props.descLabel}
-              value={props.name}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                props.onChangeName!(event.target.value, props.id);
-              }}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={1} display="flex" alignItems="center">
-            <ActionButon />
-          </Grid>
-        </Grid>
-      );
-    },
-    []
-  );
-
   return (
     <Grid container>
       <Grid item xs={12} mx="auto">
@@ -133,6 +107,7 @@ const AddAlternatives: React.FunctionComponent<AddAlternativesProps> = () => {
 
         <Grid item xs={12} mt={1}>
           <AlternativeInputsGroup
+						ref={alternativeNameInputRef}
             name={name}
             descLabel="Nova alternativa"
             onChangeName={handleNameChange}
