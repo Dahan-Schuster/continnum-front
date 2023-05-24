@@ -6,6 +6,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SelectCriterionType from "../../components/SelectCriterionType";
 import CustomInputLabel from "../../components/CustomInputLabel";
+import config from '../../config.json'
 
 interface AddCriteriaProps {}
 
@@ -31,6 +32,7 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
     addCriterion,
     deleteCriterion,
     editCriterion,
+    setValidationMessage,
   } = useModel();
 
   // valores dos inputs de nome e peso do novo tomador de decisão
@@ -72,7 +74,9 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
    * Define se u usuárie pode avançar baseado no tamanho do array de cirtérios
    */
   React.useEffect(() => {
-    setCanGoForward(criteria.length > 0);
+    const _canGoForward = criteria.length > 0;
+    setCanGoForward(_canGoForward);
+    setValidationMessage(_canGoForward ? "" : config.criteriaValidationMessage);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [criteria]);
 
@@ -137,7 +141,9 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
               descLabel={`#${index + 1}`}
               onChangeName={(n, id) => editCriterion(id!, { description: n })}
               type={criterion.criterion_type}
-              onChangeType={(t, id) => editCriterion(id!, { criterion_type: t })}
+              onChangeType={(t, id) =>
+                editCriterion(id!, { criterion_type: t })
+              }
               ActionButon={() => (
                 <IconButton
                   color="primary"
