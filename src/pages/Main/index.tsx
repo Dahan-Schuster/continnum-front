@@ -98,7 +98,7 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
                   fontSize={"0.8rem"}
                   color="background"
                 >
-                  {validationMessage}
+                  {validationMessage || "Ir para o próximo passo"}
                 </Typography>
               }
             >
