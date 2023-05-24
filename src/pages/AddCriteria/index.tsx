@@ -1,24 +1,14 @@
 import React from "react";
-import { Grid, IconButton, TextField } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 import { useModel } from "../../contexts/ModelContext";
 import { CriterionType } from "../../declarations";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
-import SelectCriterionType from "../../components/SelectCriterionType";
 import CustomInputLabel from "../../components/CustomInputLabel";
-import config from '../../config.json'
+import config from "../../config.json";
+import CriterionInputsGroup from "./CriterionInputsGroup";
 
 interface AddCriteriaProps {}
-
-interface CriterionInputsGroupProps {
-  id?: string;
-  description: string;
-  descLabel?: string;
-  type: CriterionType;
-  onChangeName: (value: string, decisionMakerId?: string) => void;
-  onChangeType: (value: CriterionType, decisionMakerId?: string) => void;
-  ActionButon: React.FC;
-}
 
 /**
  * Tela para cadastrar, editar, deletar e listar Critérios do Modelo
@@ -35,9 +25,19 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
     setValidationMessage,
   } = useModel();
 
+	const criterionNameInputRef = React.useRef<HTMLInputElement>(null);
+
   // valores dos inputs de nome e peso do novo tomador de decisão
   const [description, setDescription] = React.useState<string>("");
   const [type, setType] = React.useState<CriterionType>("benefit");
+
+  /**
+   * Foca o input de nome do novo Criterion sempre que o tamanho da
+   * lista mudar (adicionou ou removeu critérios)
+   */
+  React.useEffect(() => {
+    criterionNameInputRef.current?.focus();
+  }, [criteria.length]);
 
   /**
    * Callback chamado ao adicionar um Criterion clicando no ícone AddIcon
@@ -88,45 +88,6 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  /**
-   * Renderiza os inputs de cadastro ou edição de um critério
-   * Recebe nome, tipo e os callbacks de edição dos inputs
-   */
-  const CriterionInputsGroup = React.useCallback(
-    (props: CriterionInputsGroupProps) => {
-      const { ActionButon, id } = props;
-      const selectId = id
-        ? `select-type-criterion-${id}`
-        : "select-type-new-criterion";
-      return (
-        <Grid container spacing={1} p={1}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              label={props.descLabel}
-              value={props.description}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                props.onChangeName!(event.target.value, props.id);
-              }}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={11} sm={5}>
-            <SelectCriterionType
-              id={selectId}
-              onChange={(type) => props.onChangeType(type, props.id)}
-              type={props.type}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={1} display="flex" alignItems="center">
-            <ActionButon />
-          </Grid>
-        </Grid>
-      );
-    },
-    []
-  );
-
   return (
     <Grid container>
       <Grid item xs={12} mx="auto">
@@ -159,6 +120,7 @@ const AddCriteria: React.FunctionComponent<AddCriteriaProps> = () => {
 
         <Grid item xs={12} mt={1}>
           <CriterionInputsGroup
+						ref={criterionNameInputRef}
             description={description}
             descLabel="Novo critério"
             onChangeName={handleDescriptionChange}
