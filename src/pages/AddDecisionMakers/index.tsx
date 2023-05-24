@@ -64,6 +64,14 @@ const AddDecisionMakers = () => {
   );
 
   /**
+   * Foca o input de nome do novo DecisionMaker sempre que o tamanho da
+   * lista mudar (adicionou ou removou DMs)
+   */
+  React.useEffect(() => {
+    newDecisionMakerInputRef.current?.focus();
+  }, [decisionMakers.length]);
+
+  /**
    * Callback chamado ao adicionar um DecisionMaker clicando no ícone AddIcon
    */
   const handleAddDecisionMaker = React.useCallback(() => {
@@ -73,7 +81,6 @@ const AddDecisionMakers = () => {
     addDecisionMaker(name, newWeight);
     setName("");
     setWeight("");
-    newDecisionMakerInputRef.current?.focus();
   }, [addDecisionMaker, name, validateNewTotalWeight, weight]);
 
   /**
