@@ -86,7 +86,7 @@ const MainPage: React.FunctionComponent<MainPageProps> = () => {
             <Button
               variant={canGoBack ? "contained" : "outlined"}
               onClick={canGoBack ? goBack : undefined}
-              color={canGoBack ? "primary" : "secondary"}
+              color="secondary"
             >
               Voltar
             </Button>
